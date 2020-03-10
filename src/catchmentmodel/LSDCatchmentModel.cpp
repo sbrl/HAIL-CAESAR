@@ -407,7 +407,10 @@ std::vector< std::vector<float> > LSDCatchmentModel::read_rainfalldata(
             << FILENAME << std::endl;
 
   // open the data file
-  std::ifstream infile(FILENAME.c_str());
+  std::istream infile = cin;
+  if(FILENAME != "-")
+    infile = ifstream(FILENAME.c_str());
+
 
   std::string line;
   int i = 0;
