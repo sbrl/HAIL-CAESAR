@@ -2155,6 +2155,8 @@ void LSDCatchmentModel::check_DEM_edge_condition()
 
 	unsigned maxcols = jmax;
 	unsigned maxrows = imax;
+	
+	std::cout << "maxcols: " << maxcols << ", maxrows: " << maxrows << std::endl;
 
 	// start at 1 because zeroth elements are zeroed previously.
 	// (i.e. like a zero border surrounding.
@@ -2185,6 +2187,8 @@ void LSDCatchmentModel::check_DEM_edge_condition()
 			temp = elev[n][maxcols];
 		}
 	}
+	
+	std::cout << "After | temp: " << temp << std::endl;
 
 	if (temp < -10)
 	{
