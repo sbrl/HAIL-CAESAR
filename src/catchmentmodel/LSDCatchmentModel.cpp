@@ -115,9 +115,9 @@ void LSDCatchmentModel::initialise_model_domain_extents()
 
 		// read the georeferencing data and metadata
 		data_in >> str >> jmax;
-		std::cout << "NCols: " << jmax << " str: " << std::endl;
+		std::cout << "NCols: " << jmax << " str: " << str << std::endl;
 		data_in >> str >> imax;
-		std::cout << "NRows: " << imax << " str: " << std::endl;
+		std::cout << "NRows: " << imax << " str: " << str << std::endl;
 		data_in >> str >> xll
 		>> str >> yll
 		>> str >> DX                 // cell size or grid resolution
