@@ -422,6 +422,9 @@ std::vector <std::vector <float> > LSDCatchmentModel::read_rainfalldata(
 	if (FILENAME != "-") {
 		infile = new ifstream(FILENAME.c_str());
 	}
+	else {
+		std::cout << "Reading railfall data from stdin." << std::endl;
+	}
 
 
 	std::string line;
