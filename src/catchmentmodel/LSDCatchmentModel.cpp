@@ -279,8 +279,11 @@ void LSDCatchmentModel::load_data()
 	if (rainfall_data_on == true)
 	{
 		std::string RAINFALL_FILENAME = read_path + "/" + rainfall_data_file;
+		if(rainfall_data_file == "-")
+			RAINFALL_FILENAME = rainfall_data_file;
+		
 		// Check for the file first of all
-		if (!does_file_exist(RAINFALL_FILENAME))
+		if (!does_file_exist(RAINFALL_FILENAME) && rainfall_data_file !== "-")
 		{
 			std::cout << "No rainfall data file found by name of: "
 					  << RAINFALL_FILENAME << std::endl
