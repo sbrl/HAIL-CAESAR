@@ -93,7 +93,7 @@ Fortran_Array1D<T>::Fortran_Array1D(const Fortran_Array1D<T> &A) : v_(A.v_),  n_
 		data_(A.data_)
 {
 #ifdef TNT_DEBUG
-	std::cout << "Created Fortran_Array1D(const Fortran_Array1D<T> &A) \n";
+	std::cerr << "Created Fortran_Array1D(const Fortran_Array1D<T> &A) \n";
 #endif
 
 }
@@ -103,7 +103,7 @@ template <class T>
 Fortran_Array1D<T>::Fortran_Array1D(int n) : v_(n), n_(n), data_(v_.begin())
 {
 #ifdef TNT_DEBUG
-	std::cout << "Created Fortran_Array1D(int n) \n";
+	std::cerr << "Created Fortran_Array1D(int n) \n";
 #endif
 }
 
@@ -111,7 +111,7 @@ template <class T>
 Fortran_Array1D<T>::Fortran_Array1D(int n, const T &val) : v_(n), n_(n), data_(v_.begin()) 
 {
 #ifdef TNT_DEBUG
-	std::cout << "Created Fortran_Array1D(int n, const T& val) \n";
+	std::cerr << "Created Fortran_Array1D(int n, const T& val) \n";
 #endif
 	set_(data_, data_+ n, val);
 
@@ -121,7 +121,7 @@ template <class T>
 Fortran_Array1D<T>::Fortran_Array1D(int n, T *a) : v_(a), n_(n) , data_(v_.begin())
 {
 #ifdef TNT_DEBUG
-	std::cout << "Created Fortran_Array1D(int n, T* a) \n";
+	std::cerr << "Created Fortran_Array1D(int n, T* a) \n";
 #endif
 }
 
@@ -219,7 +219,7 @@ template <class T>
 inline Fortran_Array1D<T> Fortran_Array1D<T>::subarray(int i0, int i1)
 {
 #ifdef TNT_DEBUG
-		std::cout << "entered subarray. \n";
+		std::cerr << "entered subarray. \n";
 #endif
 	if ((i0 > 0) && (i1 < n_) || (i0 <= i1))
 	{
@@ -232,7 +232,7 @@ inline Fortran_Array1D<T> Fortran_Array1D<T>::subarray(int i0, int i1)
 	else
 	{
 #ifdef TNT_DEBUG
-		std::cout << "subarray:  null return.\n";
+		std::cerr << "subarray:  null return.\n";
 #endif
 		return Fortran_Array1D<T>();
 	}

@@ -117,7 +117,7 @@ LSDIndexRaster& LSDIndexRaster::operator=(const LSDIndexRaster& rhs)
 // SMM 2012
 void LSDIndexRaster::create()
 {
-	//cout << "You need to initialize with a filename!" << endl;
+	//cerr << "You need to initialize with a filename!" << endl;
 	//exit(EXIT_FAILURE);
 }
 
@@ -144,12 +144,12 @@ void LSDIndexRaster::create(int nrows, int ncols, float xmin, float ymin,
 
 	if (RasterData.dim1() != NRows)
 	{
-		cout << "LSDIndexRaster create::dimension of data is not the same as stated in NRows!" << endl;
+		cerr << "LSDIndexRaster create::dimension of data is not the same as stated in NRows!" << endl;
 		exit(EXIT_FAILURE);
 	}
 	if (RasterData.dim2() != NCols)
 	{
-		cout << "LSDIndexRaster create::dimension of data is not the same as stated in NRows!" << endl;
+		cerr << "LSDIndexRaster create::dimension of data is not the same as stated in NRows!" << endl;
 		exit(EXIT_FAILURE);
 	}
 }
@@ -163,8 +163,8 @@ void LSDIndexRaster::create(int nrows, int ncols, float xmin, float ymin,
 void LSDIndexRaster::create(int nrows, int ncols, float xmin, float ymin,
 							float cellsize, int ndv, Array2D <int> data, map <string, string> GRS_map)
 {
-	//cout << "YOYOYOYOY" << endl;
-	//cout << "NR: " << NRows << " NC: " << NCols << endl;
+	//cerr << "YOYOYOYOY" << endl;
+	//cerr << "NR: " << NRows << " NC: " << NCols << endl;
 
 	NRows                 = nrows;
 	NCols                 = ncols;
@@ -178,12 +178,12 @@ void LSDIndexRaster::create(int nrows, int ncols, float xmin, float ymin,
 
 	if (RasterData.dim1() != NRows)
 	{
-		cout << "LSDIndexRaster create::dimension of data is not the same as stated in NRows!" << endl;
+		cerr << "LSDIndexRaster create::dimension of data is not the same as stated in NRows!" << endl;
 		exit(EXIT_FAILURE);
 	}
 	if (RasterData.dim2() != NCols)
 	{
-		cout << "LSDIndexRaster create::dimension of data is not the same as stated in NRows!" << endl;
+		cerr << "LSDIndexRaster create::dimension of data is not the same as stated in NRows!" << endl;
 		exit(EXIT_FAILURE);
 	}
 }
@@ -195,8 +195,8 @@ void LSDIndexRaster::create(int nrows, int ncols, float xmin, float ymin,
 void LSDIndexRaster::create(int nrows, int ncols, float xmin, float ymin,
 							float cellsize, int ndv, map <string, string> GRS_map, int ConstValue)
 {
-	//cout << "YOYOYOYOY" << endl;
-	//cout << "NR: " << NRows << " NC: " << NCols << endl;
+	//cerr << "YOYOYOYOY" << endl;
+	//cerr << "NR: " << NRows << " NC: " << NCols << endl;
 
 	NRows                 = nrows;
 	NCols                 = ncols;
@@ -212,12 +212,12 @@ void LSDIndexRaster::create(int nrows, int ncols, float xmin, float ymin,
 
 	if (RasterData.dim1() != NRows)
 	{
-		cout << "LSDIndexRaster create::dimension of data is not the same as stated in NRows!" << endl;
+		cerr << "LSDIndexRaster create::dimension of data is not the same as stated in NRows!" << endl;
 		exit(EXIT_FAILURE);
 	}
 	if (RasterData.dim2() != NCols)
 	{
-		cout << "LSDIndexRaster create::dimension of data is not the same as stated in NRows!" << endl;
+		cerr << "LSDIndexRaster create::dimension of data is not the same as stated in NRows!" << endl;
 		exit(EXIT_FAILURE);
 	}
 }
@@ -293,7 +293,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 	string dot = ".";
 
 	string_filename = filename + dot + extension;
-	cout << "The filename is " << string_filename << endl;
+	cerr << "The filename is " << string_filename << endl;
 	int DataType = 2;
 
 	if (extension == "asc")
@@ -310,7 +310,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 		>> str >> DataResolution
 		>> str >> NoDataValue;
 
-		cout << "Loading asc file; NCols: " << NCols << " NRows: " << NRows << endl
+		cerr << "Loading asc file; NCols: " << NCols << " NRows: " << NRows << endl
 			 << "X minimum: " << XMinimum << " YMinimum: " << YMinimum << endl
 			 << "Data Resolution: " << DataResolution << " and No Data Value: "
 			 << NoDataValue << endl;
@@ -342,7 +342,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 		ifstream ifs(header_filename.c_str());
 		if (ifs.fail())
 		{
-			cout << "\nFATAL ERROR: the header file \"" << header_filename
+			cerr << "\nFATAL ERROR: the header file \"" << header_filename
 				 << "\" doesn't exist" << std::endl;
 			exit(EXIT_FAILURE);
 		}
@@ -356,7 +356,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 		}
 		ifs.close();
 
-		cout << "Loading asc file; NCols: " << NCols << " NRows: " << NRows << endl
+		cerr << "Loading asc file; NCols: " << NCols << " NRows: " << NRows << endl
 			 << "X minimum: " << XMinimum << " YMinimum: " << YMinimum << endl
 			 << "Data Resolution: " << DataResolution << " and No Data Value: "
 			 << NoDataValue << endl;
@@ -368,7 +368,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 		ifstream ifs_data(string_filename.c_str(), ios::in | ios::binary);
 		if (ifs_data.fail())
 		{
-			cout << "\nFATAL ERROR: the data file \"" << string_filename
+			cerr << "\nFATAL ERROR: the data file \"" << string_filename
 				 << "\" doesn't exist" << endl;
 			exit(EXIT_FAILURE);
 		}
@@ -401,7 +401,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 		ifstream ifs(header_filename.c_str());
 		if (ifs.fail())
 		{
-			cout << "\nFATAL ERROR: the header file \"" << header_filename
+			cerr << "\nFATAL ERROR: the header file \"" << header_filename
 				 << "\" doesn't exist" << std::endl;
 			exit(EXIT_FAILURE);
 		}
@@ -411,7 +411,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 			ifs >> str;
 			if (str != "ENVI")
 			{
-				cout << "\nFATAL ERROR: this is not an ENVI header file!, first line is: "
+				cerr << "\nFATAL ERROR: this is not an ENVI header file!, first line is: "
 					 << str << endl;
 				exit(EXIT_FAILURE);
 			}
@@ -425,10 +425,10 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 				{
 					lines.push_back(thisline);
 				}
-				//cout << "Number of lines is: " << lines.size() << endl;
+				//cerr << "Number of lines is: " << lines.size() << endl;
 				//for(int i = 0; i< int(lines.size()); i++)
 				//{
-				//  cout << "Line["<<i<<"]: " << lines[i] << endl;
+				//  cerr << "Line["<<i<<"]: " << lines[i] << endl;
 				//}
 
 				// now loop through and get the number of rows
@@ -446,7 +446,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 						istringstream iss(lines[counter]);
 						iss >> str >> str >> str;
 						this_NRows = atoi(str.c_str());
-						//cout << "NRows = " << this_NRows << endl;
+						//cerr << "NRows = " << this_NRows << endl;
 						NRows = this_NRows;
 
 						// advance to the end so you move on to the new loop
@@ -470,7 +470,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 						istringstream iss(lines[counter]);
 						iss >> str >> str >> str >> str >> str;
 						DataType = atoi(str.c_str());
-						cout << "Data Type = " << DataType << endl;
+						cerr << "Data Type = " << DataType << endl;
 
 						// advance to the end so you move on to the new loop
 						counter = lines.size();
@@ -494,7 +494,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 						istringstream iss(lines[counter]);
 						iss >> str >> str >> str;
 						this_NCols = atoi(str.c_str());
-						//cout << "NCols = " << this_NCols << endl;
+						//cerr << "NCols = " << this_NCols << endl;
 						NCols = this_NCols;
 
 						// advance to the end so you move on to the new loop
@@ -519,7 +519,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 						istringstream iss(lines[counter]);
 						iss >> str >> str >> str >> str >> str;
 						this_NoDataValue = atoi(str.c_str());
-						//cout << "NCols = " << this_NCols << endl;
+						//cerr << "NCols = " << this_NCols << endl;
 						NoDataValue = this_NoDataValue;
 
 						NoDataExists = 1;                                                 // set this to true
@@ -542,7 +542,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 					found = lines[counter].find(str_find);
 					if (found != string::npos)
 					{
-						//cout << "Found map info on line " << counter << '\n';
+						//cerr << "Found map info on line " << counter << '\n';
 
 						// now split the line
 						size_t start_pos;
@@ -551,9 +551,9 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 						string closed_curly_bracket = "}";
 						start_pos = lines[counter].find(open_curly_bracket);
 						end_pos   = lines[counter].find(closed_curly_bracket);
-						//cout << "startpos: " << start_pos << " and end pos: " << end_pos << endl;
+						//cerr << "startpos: " << start_pos << " and end pos: " << end_pos << endl;
 						string info_str = lines[counter].substr(start_pos + 1, end_pos - start_pos - 1);
-						//cout << "\nThe map info string is:\n" << info_str << endl;
+						//cerr << "\nThe map info string is:\n" << info_str << endl;
 						string mi_key = "ENVI_map_info";
 						GeoReferencingStrings[mi_key] = info_str;
 
@@ -580,10 +580,10 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 						// http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm  - SWDG
 						if (mapinfo_strings[5] != mapinfo_strings[6])
 						{
-							cout << "Warning! Loading ENVI DEM, but X and Y data spacing are different!" << endl;
+							cerr << "Warning! Loading ENVI DEM, but X and Y data spacing are different!" << endl;
 						}
 
-						//cout << "Xmin: " << XMinimum << " YMin: " << YMinimum << " spacing: "
+						//cerr << "Xmin: " << XMinimum << " YMin: " << YMinimum << " spacing: "
 						//     << DataResolution << endl;
 
 						counter = lines.size();
@@ -603,7 +603,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 					found = lines[counter].find(str_find);
 					if (found != string::npos)
 					{
-						//cout << "Found coordinate system string on line " << counter << '\n';
+						//cerr << "Found coordinate system string on line " << counter << '\n';
 
 						// now split the line
 						size_t start_pos;
@@ -612,9 +612,9 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 						string closed_curly_bracket = "}";
 						start_pos = lines[counter].find(open_curly_bracket);
 						end_pos   = lines[counter].find(closed_curly_bracket);
-						//cout << "startpos: " << start_pos << " and end pos: " << end_pos << endl;
+						//cerr << "startpos: " << start_pos << " and end pos: " << end_pos << endl;
 						string csys_str = lines[counter].substr(start_pos + 1, end_pos - start_pos - 1);
-						//cout << "\nThe coordinate system string is:\n" << csys_str << endl;
+						//cerr << "\nThe coordinate system string is:\n" << csys_str << endl;
 						string cs_key = "ENVI_coordinate_system";
 						GeoReferencingStrings[cs_key] = csys_str;
 						counter = lines.size();
@@ -640,7 +640,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 		ifstream ifs_data(string_filename.c_str(), ios::in | ios::binary);
 		if (ifs_data.fail())
 		{
-			cout << "\nFATAL ERROR: the data file \"" << string_filename
+			cerr << "\nFATAL ERROR: the data file \"" << string_filename
 				 << "\" doesn't exist" << endl;
 			exit(EXIT_FAILURE);
 		}
@@ -648,28 +648,28 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 		{
 			if (DataType == 2)
 			{
-				//cout << "Loading raster, recasting data from int to float!" << endl;
+				//cerr << "Loading raster, recasting data from int to float!" << endl;
 				int temp;
-				//cout << "Integer size: " << sizeof(temp) << endl;
+				//cerr << "Integer size: " << sizeof(temp) << endl;
 				for (int i = 0; i < NRows; ++i)
 				{
 					for (int j = 0; j < NCols; ++j)
 					{
 						ifs_data.read(reinterpret_cast <char *>(&temp), 2);
-						//cout << temp << " ";
+						//cerr << temp << " ";
 						data[i][j] = int(temp);
 						if (data[i][j] < -1e10)
 						{
 							data[i][j] = NoDataValue;
 						}
 					}
-					//cout << endl;
+					//cerr << endl;
 				}
 			}
 			else if (DataType == 4)
 			{
 				float temp;
-				//cout << "Float size: " << sizeof(temp) << endl;
+				//cerr << "Float size: " << sizeof(temp) << endl;
 				for (int i = 0; i < NRows; ++i)
 				{
 					for (int j = 0; j < NCols; ++j)
@@ -687,7 +687,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 			else if (DataType == 13)
 			{
 				unsigned long int temp;
-				//cout << "Float size: " << sizeof(temp) << endl;
+				//cerr << "Float size: " << sizeof(temp) << endl;
 				for (int i = 0; i < NRows; ++i)
 				{
 					for (int j = 0; j < NCols; ++j)
@@ -704,10 +704,10 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 			}
 			else
 			{
-				cout << "WARNING loading ENVI raster with unusual data type. " << endl
+				cerr << "WARNING loading ENVI raster with unusual data type. " << endl
 					 << "If you get a crazy DEM go to LINE 604 of LSDIndexRaster.cpp to debug" << endl;
 				int temp;                                 // might need to change this
-				//cout << "Float size: " << sizeof(temp) << endl;
+				//cerr << "Float size: " << sizeof(temp) << endl;
 				for (int i = 0; i < NRows; ++i)
 				{
 					for (int j = 0; j < NCols; ++j)
@@ -726,7 +726,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 		}
 		ifs_data.close();
 
-		cout << "Loading ENVI bil file; NCols: " << NCols << " NRows: " << NRows << endl
+		cerr << "Loading ENVI bil file; NCols: " << NCols << " NRows: " << NRows << endl
 			 << "X minimum: " << XMinimum << " YMinimum: " << YMinimum << endl
 			 << "Data Resolution: " << DataResolution << " and No Data Value: "
 			 << NoDataValue << endl;
@@ -736,7 +736,7 @@ void LSDIndexRaster::read_raster(string filename, string extension)
 	}
 	else
 	{
-		cout << "You did not enter and approprate extension!" << endl
+		cerr << "You did not enter and approprate extension!" << endl
 			 << "You entered: " << extension << " options are .flt and .asc" << endl;
 		exit(EXIT_FAILURE);
 	}
@@ -757,7 +757,7 @@ void LSDIndexRaster::write_raster(string filename, string extension)
 	string dot = ".";
 
 	string_filename = filename + dot + extension;
-	cout << "The filename is " << string_filename << endl;
+	cerr << "The filename is " << string_filename << endl;
 
 	// this first bit of logic is for the asc file.
 	if (extension == "asc")
@@ -767,7 +767,7 @@ void LSDIndexRaster::write_raster(string filename, string extension)
 
 		if (data_out.fail())
 		{
-			cout << "\nFATAL ERROR: unable to write to " << string_filename << endl;
+			cerr << "\nFATAL ERROR: unable to write to " << string_filename << endl;
 			exit(EXIT_FAILURE);
 		}
 
@@ -834,11 +834,11 @@ void LSDIndexRaster::write_raster(string filename, string extension)
 		// you need to strip the filename
 		string frontslash = "/";
 		size_t found      = string_filename.find_last_of(frontslash);
-		//cout << "Found is: " << found << endl;
+		//cerr << "Found is: " << found << endl;
 
 		int    length     = int(string_filename.length());
 		string this_fname = string_filename.substr(found + 1, length - found - 1);
-		//cout << "fname is: " << this_fname << endl;
+		//cerr << "fname is: " << this_fname << endl;
 
 		ofstream header_ofs(header_filename.c_str());
 		string   str;
@@ -867,23 +867,23 @@ void LSDIndexRaster::write_raster(string filename, string extension)
 		if (iter != GeoReferencingStrings.end())
 		{
 			mi_str = (*iter).second;
-			//cout << "Map info system string exists, it is: " << mi_str << endl;
+			//cerr << "Map info system string exists, it is: " << mi_str << endl;
 			header_ofs << "map info = {" << mi_str << "}" << endl;
 		}
 		else
 		{
-			cout << "Warning, writing ENVI file but no map info string" << endl;
+			cerr << "Warning, writing ENVI file but no map info string" << endl;
 		}
 		iter = GeoReferencingStrings.find(cs_str_key);
 		if (iter != GeoReferencingStrings.end())
 		{
 			cs_str = (*iter).second;
-			//cout << "Coord, system string exists, it is: " << cs_str << endl;
+			//cerr << "Coord, system string exists, it is: " << cs_str << endl;
 			header_ofs << "coordinate system string = {" << cs_str << "}" << endl;
 		}
 		else
 		{
-			cout << "Warning, writing ENVI file but no coordinate system string" << endl;
+			cerr << "Warning, writing ENVI file but no coordinate system string" << endl;
 		}
 		header_ofs << "data ignore value = " << NoDataValue << endl;
 
@@ -904,7 +904,7 @@ void LSDIndexRaster::write_raster(string filename, string extension)
 	}
 	else
 	{
-		cout << "You did not enter and approprate extension!" << endl
+		cerr << "You did not enter and approprate extension!" << endl
 			 << "You entered: " << extension << " options are .flt, .bil and .asc" << endl;
 		exit(EXIT_FAILURE);
 	}
@@ -963,7 +963,7 @@ void LSDIndexRaster::get_lat_and_long_locations(int row, int col, double& lat,
 	int  UTM_zone;
 	bool is_North;
 	get_UTM_information(UTM_zone, is_North);
-	//cout << endl << endl << "Line 1034, UTM zone is: " << UTM_zone << endl;
+	//cerr << endl << endl << "Line 1034, UTM zone is: " << UTM_zone << endl;
 
 
 	if (UTM_zone == NoDataValue)
@@ -1042,8 +1042,8 @@ void LSDIndexRaster::get_UTM_information(int& UTM_zone, bool& is_North)
 			mapinfo_strings.push_back(substr);
 		}
 		UTM_zone = atoi(mapinfo_strings[7].c_str());
-		//cout << "Line 1041, UTM zone: " << UTM_zone << endl;
-		//cout << "LINE 1042 LSDRaster, N or S: " << mapinfo_strings[7] << endl;
+		//cerr << "Line 1041, UTM zone: " << UTM_zone << endl;
+		//cerr << "LINE 1042 LSDRaster, N or S: " << mapinfo_strings[7] << endl;
 
 		// find if the zone is in the north
 		string n_str = "n";
@@ -1059,7 +1059,7 @@ void LSDIndexRaster::get_UTM_information(int& UTM_zone, bool& is_North)
 		{
 			is_North = true;
 		}
-		//cout << "is_North is: " << is_North << endl;
+		//cerr << "is_North is: " << is_North << endl;
 	}
 	else
 	{
@@ -1312,7 +1312,7 @@ LSDIndexRaster LSDIndexRaster::clip_to_smaller_raster(LSDIndexRaster& smaller_ra
 	float SR_XMaximum = SR_XMinimum + (SR_NCols) * SR_DataR;
 	float SR_YMaximum = SR_YMinimum + (SR_NRows) * SR_DataR;
 
-	cout << "Small Xmin: " << SR_XMinimum << " YMin: " << SR_YMinimum << " Xmax: "
+	cerr << "Small Xmin: " << SR_XMinimum << " YMin: " << SR_YMinimum << " Xmax: "
 		 << SR_XMaximum << " YMax: " << SR_YMaximum << endl;
 
 
@@ -1347,7 +1347,7 @@ LSDIndexRaster LSDIndexRaster::clip_to_smaller_raster(LSDIndexRaster& smaller_ra
 		YUL_row = NRows - 1;
 	}
 
-	cout << "Small XLLCol: " << XLL_col << " XLR_col: " << XUL_col << " XLLrow: "
+	cerr << "Small XLLCol: " << XLL_col << " XLR_col: " << XUL_col << " XLLrow: "
 		 << YLL_row << " YUL_row: " << YUL_row << endl;
 
 
@@ -1355,7 +1355,7 @@ LSDIndexRaster LSDIndexRaster::clip_to_smaller_raster(LSDIndexRaster& smaller_ra
 	int New_NRows = YLL_row - YUL_row;
 	int New_NCols = XUL_col - XLL_col;
 
-	cout << "New NRows: " << New_NRows << " New_NCols: " << New_NCols << endl;
+	cerr << "New NRows: " << New_NRows << " New_NCols: " << New_NCols << endl;
 
 	// now extract the data for the new raster
 	float NewR_XMinimum = XMinimum + float(XLL_col) * DataResolution;
@@ -1400,7 +1400,7 @@ LSDIndexRaster LSDIndexRaster::clip_to_smaller_raster(LSDRaster& smaller_raster)
 	float SR_XMaximum = SR_XMinimum + (SR_NCols) * SR_DataR;
 	float SR_YMaximum = SR_YMinimum + (SR_NRows) * SR_DataR;
 
-	cout << "Small Xmin: " << SR_XMinimum << " YMin: " << SR_YMinimum << " Xmax: "
+	cerr << "Small Xmin: " << SR_XMinimum << " YMin: " << SR_YMinimum << " Xmax: "
 		 << SR_XMaximum << " YMax: " << SR_YMaximum << endl;
 
 
@@ -1435,7 +1435,7 @@ LSDIndexRaster LSDIndexRaster::clip_to_smaller_raster(LSDRaster& smaller_raster)
 		YUL_row = NRows - 1;
 	}
 
-	cout << "Small XLLCol: " << XLL_col << " XLR_col: " << XUL_col << " XLLrow: "
+	cerr << "Small XLLCol: " << XLL_col << " XLR_col: " << XUL_col << " XLLrow: "
 		 << YLL_row << " YUL_row: " << YUL_row << endl;
 
 
@@ -1443,7 +1443,7 @@ LSDIndexRaster LSDIndexRaster::clip_to_smaller_raster(LSDRaster& smaller_raster)
 	int New_NRows = YLL_row - YUL_row;
 	int New_NCols = XUL_col - XLL_col;
 
-	cout << "New NRows: " << New_NRows << " New_NCols: " << New_NCols << endl;
+	cerr << "New NRows: " << New_NRows << " New_NCols: " << New_NCols << endl;
 
 	// now extract the data for the new raster
 	float NewR_XMinimum = XMinimum + float(XLL_col) * DataResolution;
@@ -1565,7 +1565,7 @@ void LSDIndexRaster::Update_GeoReferencingStrings()
 		GeoReferencingStrings[mi_str_key] = CombineMapinfo.str();
 
 
-		cout << "New string is: " << endl << GeoReferencingStrings[mi_str_key] << endl;
+		cerr << "New string is: " << endl << GeoReferencingStrings[mi_str_key] << endl;
 	}
 }
 
@@ -1598,7 +1598,7 @@ void LSDIndexRaster::impose_georeferencing_UTM(int zone, string NorS)
 	}
 	else
 	{
-		cout << "imposing georeferencing, but I didn't understand N or S, defaulting to North." << endl;
+		cerr << "imposing georeferencing, but I didn't understand N or S, defaulting to North." << endl;
 		str_NorS        = "N";
 		str_NorSlong    = "North";
 		cs_string_fnbit = "0";
@@ -1718,8 +1718,8 @@ int LSDIndexRaster::Find_UTM_central_meridian(int UTM_zone)
 	// now look up the table
 	if (UTM_zone < 1 || UTM_zone > 60)
 	{
-		cout << "Trying to assign central meridian but you have chosen an invalid UTM zone" << endl;
-		cout << "defaulting to central meridian of 0";
+		cerr << "Trying to assign central meridian but you have chosen an invalid UTM zone" << endl;
+		cerr << "defaulting to central meridian of 0";
 		central_meridian = 0;
 	}
 	else
@@ -1779,7 +1779,7 @@ void LSDIndexRaster::get_row_and_col_of_a_point(float X_coordinate, float Y_coor
 	int col_point = int(X_coordinate_shifted_origin / DataResolution);
 	int row_point = (NRows - 1) - int(round(Y_coordinate_shifted_origin / DataResolution));
 
-	//cout << "Getting row and col, " << row_point << " " << col_point << endl;
+	//cerr << "Getting row and col, " << row_point << " " << col_point << endl;
 
 	if (col_point > 0 && col_point < NCols - 1)
 	{
@@ -1919,24 +1919,24 @@ void LSDIndexRaster::get_points_in_holes_for_interpolation(int NSteps, int NSwee
 	// first the top
 
 	// This is the first sweep. It runs along the edge
-	cout << "Initial sweep. " << endl;
+	cerr << "Initial sweep. " << endl;
 	for (int col = 0; col < NCols; col++)
 	{
 		if (col % 250 == 0)
 		{
-			cout << "Column " << col << " of " << NCols << endl;
+			cerr << "Column " << col << " of " << NCols << endl;
 		}
 
 		release_random_bot(Visited, 0, col, NSteps);
 		release_random_bot(Visited, NRows - 1, col, NSteps);
 	}
 
-	cout << "Running rows" << endl;
+	cerr << "Running rows" << endl;
 	for (int row = 0; row < NRows; row++)
 	{
 		if (row % 250 == 0)
 		{
-			cout << "Row " << row << " of " << NRows << endl;
+			cerr << "Row " << row << " of " << NRows << endl;
 		}
 
 		release_random_bot(Visited, row, 0, NSteps);
@@ -1947,7 +1947,7 @@ void LSDIndexRaster::get_points_in_holes_for_interpolation(int NSteps, int NSwee
 	// now subsequent sweeps run from visited nodes
 	for (int sweep = 0; sweep < NSweeps; sweep++)
 	{
-		cout << "Sweep number " << sweep << endl;
+		cerr << "Sweep number " << sweep << endl;
 
 		for (int row = 0; row < NRows; row++)
 		{
@@ -1957,7 +1957,7 @@ void LSDIndexRaster::get_points_in_holes_for_interpolation(int NSteps, int NSwee
 				// don't bother with ones that have been visited a lot
 				if (Visited[row][col] > 0 && Visited[row][col] < 25)
 				{
-					//cout << "Getting this one, visted is: " << Visited[row][col] << endl;
+					//cerr << "Getting this one, visted is: " << Visited[row][col] << endl;
 					release_random_bot(Visited, row, col, NSteps);
 				}
 			}
@@ -2004,24 +2004,24 @@ LSDIndexRaster LSDIndexRaster::find_holes_with_nodata_bots(int NSteps, int NSwee
 	// first the top
 
 	// This is the first sweep. It runs along the edge
-	cout << "Initial sweep. " << endl;
+	cerr << "Initial sweep. " << endl;
 	for (int col = 0; col < NCols; col++)
 	{
 		if (col % 250 == 0)
 		{
-			cout << "Column " << col << " of " << NCols << endl;
+			cerr << "Column " << col << " of " << NCols << endl;
 		}
 
 		release_random_bot(Visited, 0, col, NSteps);
 		release_random_bot(Visited, NRows - 1, col, NSteps);
 	}
 
-	cout << "Running rows" << endl;
+	cerr << "Running rows" << endl;
 	for (int row = 0; row < NRows; row++)
 	{
 		if (row % 250 == 0)
 		{
-			cout << "Row " << row << " of " << NRows << endl;
+			cerr << "Row " << row << " of " << NRows << endl;
 		}
 
 		release_random_bot(Visited, row, 0, NSteps);
@@ -2032,7 +2032,7 @@ LSDIndexRaster LSDIndexRaster::find_holes_with_nodata_bots(int NSteps, int NSwee
 	// now subsequent sweeps run from visited nodes
 	for (int sweep = 0; sweep < NSweeps; sweep++)
 	{
-		cout << "Sweep number " << sweep << endl;
+		cerr << "Sweep number " << sweep << endl;
 
 		for (int row = 0; row < NRows; row++)
 		{
@@ -2042,7 +2042,7 @@ LSDIndexRaster LSDIndexRaster::find_holes_with_nodata_bots(int NSteps, int NSwee
 				// don't bother with ones that have been visited a lot
 				if (Visited[row][col] > 0 && Visited[row][col] < 25)
 				{
-					//cout << "Getting this one, visted is: " << Visited[row][col] << endl;
+					//cerr << "Getting this one, visted is: " << Visited[row][col] << endl;
 					release_random_bot(Visited, row, col, NSteps);
 				}
 			}
@@ -2096,7 +2096,7 @@ void LSDIndexRaster::release_random_bot(Array2D <int>& Visited, int startrow, in
 		// the bot takes NSteps random steps
 		for (int i = 0; i < NSteps; i++)
 		{
-			//cout << "Curr row: " << curr_row << " and col: " << curr_col << endl;
+			//cerr << "Curr row: " << curr_row << " and col: " << curr_col << endl;
 			Visited[curr_row][curr_col]++;
 
 			direction  = ran3(&seed);
@@ -2186,7 +2186,7 @@ LSDIndexRaster LSDIndexRaster::LSDRasterTemplate(Array2D <int> InputData)
 	}
 	else
 	{
-		cout << "Array dimensions do not match template LSDIndexRaster object" << endl;
+		cerr << "Array dimensions do not match template LSDIndexRaster object" << endl;
 		exit(EXIT_FAILURE);
 	}
 }
@@ -2203,7 +2203,7 @@ LSDIndexRaster LSDIndexRaster::Resample(float OutputResolution)
 {
 	if (OutputResolution < DataResolution)
 	{
-		cout << "Your resample resolution of " << OutputResolution << " is lower that the current data resolution " << DataResolution << endl;
+		cerr << "Your resample resolution of " << OutputResolution << " is lower that the current data resolution " << DataResolution << endl;
 		exit(EXIT_FAILURE);
 	}
 
@@ -2310,7 +2310,7 @@ LSDIndexRaster LSDIndexRaster::MergeChannelWithFloodplain(LSDIndexRaster FloodPl
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 LSDIndexRaster LSDIndexRaster::ConnectedComponents()
 {
-	cout << "\t\t Connected Components; first pass" << endl;
+	cerr << "\t\t Connected Components; first pass" << endl;
 	Array2D <int> LabelledComponents(NRows, NCols, NoDataValue);
 	int           next_label = 0;
 	bool          flag       = false;
@@ -2475,7 +2475,7 @@ LSDIndexRaster LSDIndexRaster::ConnectedComponents()
 	}
 	DS.Reduce();
 	// Second pass, assign equivalences
-	cout << "Second pass" << endl;
+	cerr << "Second pass" << endl;
 	for (int i = 0; i < NRows; ++i)
 	{
 		for (int j = 0; j < NCols; ++j)
@@ -2565,7 +2565,7 @@ LSDIndexRaster LSDIndexRaster::thin_to_skeleton()
 	int           odd           = 0;
 	while (finish_flag == 0)
 	{
-		cout << flush << "Thinning - iteration number " << count << "; ";
+		cerr << flush << "Thinning - iteration number " << count << "; ";
 		++count;
 		int removed = 0;
 		finish_flag = 1;
@@ -2585,10 +2585,10 @@ LSDIndexRaster LSDIndexRaster::thin_to_skeleton()
 			}
 		}
 		total_removed += removed;
-		cout << "removed " << removed << " pixels; " << total_removed << "; removed in total     \r";
+		cerr << "removed " << removed << " pixels; " << total_removed << "; removed in total     \r";
 		binary_old = binary_new.copy();
 	}
-	cout << "\nDone" << endl;
+	cerr << "\nDone" << endl;
 	LSDIndexRaster skeleton(NRows, NCols, XMinimum, YMinimum, DataResolution, NoDataValue, binary_new.copy(), GeoReferencingStrings);
 	return(skeleton);
 }
@@ -2601,7 +2601,7 @@ LSDIndexRaster LSDIndexRaster::find_end_points()
 	{
 		if (i % 100 == 0)
 		{
-			cout << flush << i << "/" << NRows << "\r";
+			cerr << flush << i << "/" << NRows << "\r";
 		}
 
 		for (int j = 1; j < NCols - 1; ++j)
@@ -2765,7 +2765,7 @@ LSDIndexRaster LSDIndexRaster::RemoveSmallPatches(int minimum_patch_size)
 	Array2D <int> PatchIDs = RasterData;
 
 	//Strip out any values that only occur below the minimum_segment_size param value
-	cout << "\tRemoving patches that have an area smaller than " << minimum_patch_size << " pixels." << endl;
+	cerr << "\tRemoving patches that have an area smaller than " << minimum_patch_size << " pixels." << endl;
 
 	//flatten the array to make the counting easier
 	vector <int> Flat_Patches = Flatten_Without_Nodata(PatchIDs, NoDataValue);
@@ -2810,7 +2810,7 @@ LSDIndexRaster LSDIndexRaster::RemoveSmallPatches(int minimum_patch_size)
 	}
 	else
 	{
-		cout << "\t\tNo patches below the threshold." << endl;
+		cerr << "\t\tNo patches below the threshold." << endl;
 	}
 
 	//create the final LSDIndexRaster and return it
@@ -2939,7 +2939,7 @@ LSDIndexRaster LSDIndexRaster::remove_holes_in_patches_connected_components(int 
 	{
 		pixel_radius = int(DataResolution);
 	}
-	cout << "Pixel radius: " << pixel_radius << endl;
+	cerr << "Pixel radius: " << pixel_radius << endl;
 	Array2D <int> RasterArray = RasterData.copy();
 
 	Array2D <int> FilledRaster(NRows, NCols, NoDataValue);
@@ -3165,7 +3165,7 @@ LSDIndexRaster LSDIndexRaster::remove_checkerboard_pattern()
 				{
 					//fill in pixel
 					FilledArray[row][col] = 1;
-					//cout << "Filled in pixel, woohoo" << endl;
+					//cerr << "Filled in pixel, woohoo" << endl;
 				}
 				count = 0;
 			}
@@ -3211,17 +3211,17 @@ vector <float> LSDIndexRaster::AnalysisOfQuality(LSDIndexRaster& ActualRaster)
 		for (int col = 0; col < NCols - 1; col++)
 		{
 			int ActualValue = ActualRaster.get_data_element(row, col);
-			//cout << ActualValue << endl;
+			//cerr << ActualValue << endl;
 			// check if it is a true positive
 			if (RasterData[row][col] > 0 && ActualValue == 1)
 			{
-				//cout << "TP" << endl;
+				//cerr << "TP" << endl;
 				SumTP++;
 			}
 			// check if it is a false positive
 			if (RasterData[row][col] > 0 && ActualValue <= 0)
 			{
-				//cout << "FP" << endl;
+				//cerr << "FP" << endl;
 				SumFP++;
 			}
 			// check if it is a true negative
@@ -3236,8 +3236,8 @@ vector <float> LSDIndexRaster::AnalysisOfQuality(LSDIndexRaster& ActualRaster)
 			}
 		}
 	}
-	//cout << "Got the total TPs and FPs" << endl;
-	cout << "SumTP = " << SumTP << " SumFP = " << SumFP << " SumTN = " << SumTN << " SUM FN = " << SumFN << endl;
+	//cerr << "Got the total TPs and FPs" << endl;
+	cerr << "SumTP = " << SumTP << " SumFP = " << SumFP << " SumTN = " << SumTN << " SUM FN = " << SumFN << endl;
 	float r = SumTP / (SumTP + SumFP);
 	float s = SumTP / (SumTP + SumFN);
 
@@ -3253,7 +3253,7 @@ vector <float> LSDIndexRaster::AnalysisOfQuality(LSDIndexRaster& ActualRaster)
 	// r_fn
 	quality_results[4] = 1 - quality_results[1];
 
-	cout << "r: " << r << " s: " << s << endl;
+	cerr << "r: " << r << " s: " << s << endl;
 
 	return(quality_results);
 }
@@ -3285,7 +3285,7 @@ float LSDIndexRaster::GetAreaDifference(LSDIndexRaster& ActualRaster)
 			}
 		}
 	}
-	cout << "N predicted pixels: " << NPredictedPixels << " N actual pixels: " << NActualPixels << endl;
+	cerr << "N predicted pixels: " << NPredictedPixels << " N actual pixels: " << NActualPixels << endl;
 
 	float ActualArea    = NActualPixels * DataResolution * DataResolution;
 	float PredictedArea = NPredictedPixels * DataResolution * DataResolution;

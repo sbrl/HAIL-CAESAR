@@ -24,7 +24,7 @@
 
 void rainGrid::create()
 {
-	std::cout << "You have tried to create an empty RainfallRunoff object. " <<
+	std::cerr << "You have tried to create an empty RainfallRunoff object. " <<
 		std::endl << "Please try again with some parameters" <<
 		std::endl;
 	exit(EXIT_FAILURE);
@@ -46,8 +46,8 @@ void rainGrid::create(std::vector <std::vector <float> >& rain_data,
 		return;
 	}
 
-	//std::cout << "HYDROINDEX DEBUG: " << std::endl;
-	//std::cout << hydroindex.dim1() << ", " << hydroindex.dim2() << std::endl;
+	//std::cerr << "HYDROINDEX DEBUG: " << std::endl;
+	//std::cerr << hydroindex.dim1() << ", " << hydroindex.dim2() << std::endl;
 	// DAV addeded pragma for testing 08/2016
   #pragma omp parallel for
 	for (int i = 1; i < imax; i++)
@@ -123,7 +123,7 @@ void rainGrid::interpolateRainfall_RectBivariateSpline(rainGrid&raingrid)
 
 void runoffGrid::create(int imax, int jmax)
 {
-	std::cout << "Creating an EMPTY RUNOFF GRID OBJECT..." << std::endl;
+	std::cerr << "Creating an EMPTY RUNOFF GRID OBJECT..." << std::endl;
 	// set arrays to relevant size for model domain
 	// Zero or set to very small value near zero.
 	j_array          = TNT::Array2D <double>(imax + 2, jmax + 2, 0.000000001);
@@ -142,7 +142,7 @@ void runoffGrid::create(int current_rainfall_timestep, int imax, int jmax,
 						const rainGrid& current_rainGrid,
 						const TNT::Array2D <double>& elevations)
 {
-	std::cout << "Creating a RUNOFF GRID OBJECT FROM RAINGRID..." << std::endl;
+	std::cerr << "Creating a RUNOFF GRID OBJECT FROM RAINGRID..." << std::endl;
 	// set arrays to relevant size for model domain
 	j_array          = TNT::Array2D <double>(imax + 2, jmax + 2, 0.000000001);
 	jo_array         = TNT::Array2D <double>(imax + 2, jmax + 2, 0.000000001);
@@ -177,7 +177,7 @@ void runoffGrid::calculate_runoff(int rain_factor, double M, int jmax, int imax,
 								  const rainGrid& current_rainGrid,
 								  const TNT::Array2D <double>& elevations)
 {
-	//std::cout << "calculate_runoff" << std::endl;
+	//std::cerr << "calculate_runoff" << std::endl;
 	// DAV addeded pragma for testing 08/2016
   #pragma omp parallel for
 	for (int m = 1; m < imax; m++)
@@ -200,7 +200,7 @@ void runoffGrid::calculate_runoff(int rain_factor, double M, int jmax, int imax,
 
 				if (current_rainGrid.get_rainfall(m, n) > 0)
 				{
-					//std::cout << "Rainfall is: " << current_rainGrid.get_rainfall(m, n) << std::endl;
+					//std::cerr << "Rainfall is: " << current_rainGrid.get_rainfall(m, n) << std::endl;
 					// Divide by 1000 to get m/hr, then 3600 for m/sec
 					local_rainfall_rate = rain_factor * ((current_rainGrid.get_rainfall(m, n)
 														  / 1000) / 3600);
@@ -220,7 +220,7 @@ void runoffGrid::calculate_runoff(int rain_factor, double M, int jmax, int imax,
 				// is runoff vs infiltrates (TOPMODEL based)
 				if (local_rainfall_rate > 0)
 				{
-					//std::cout << "Cell Rainfall Rate is: " << local_rainfall_rate << std::endl;
+					//std::cerr << "Cell Rainfall Rate is: " << local_rainfall_rate << std::endl;
 
 					j_array[m][n] = local_rainfall_rate / (((local_rainfall_rate - jo_array[m][n]) / jo_array[m][n])
 														   * std::exp((0 - local_rainfall_rate) * local_time_step / M) + 1);

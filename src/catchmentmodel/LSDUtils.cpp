@@ -20,10 +20,10 @@ void parse_line(std::ifstream&infile, std::string&parameter, std::string&value)
 	{
 		if (pos >= 256)
 		{
-			std::cout << "Buffer overrun, word too long in parameter line: " << std::endl;
+			std::cerr << "Buffer overrun, word too long in parameter line: " << std::endl;
 			std::string line;
 			getline(infile, line);
-			std::cout << "\t" << buff << " ! \n" << line << std::endl;
+			std::cerr << "\t" << buff << " ! \n" << line << std::endl;
 			exit(1);
 		}
 		// preceeding whitespace
@@ -96,7 +96,7 @@ std::string RemoveControlCharactersFromEndOfString(std::string toRemove)
 	{
 		if (iscntrl(toRemove[len - 1]))
 		{
-			//cout << "Bloody hell, here is another control character! Why Microsoft? Why?" << endl;
+			//cerr << "Bloody hell, here is another control character! Why Microsoft? Why?" << endl;
 			toRemove.erase(len - 1);
 		}
 	}
@@ -111,9 +111,9 @@ void quickOpenMPtest()
 	int num_threads = omp_get_max_threads();
 	int num_procs   = omp_get_num_procs();
 
-	std::cout << "Hello! My name is OpenMP. I like to do LSD (Land Surface Dynamics) in parallel!" << std::endl;
-	std::cout << "Your system has: " << num_procs << " PROCESSORS available and " << num_threads << " THREADS to use!" << std::endl;
-	std::cout << "(Note: On some systems, threads are reported the same as processors.)" << std::endl;
+	std::cerr << "Hello! My name is OpenMP. I like to do LSD (Land Surface Dynamics) in parallel!" << std::endl;
+	std::cerr << "Your system has: " << num_procs << " PROCESSORS available and " << num_threads << " THREADS to use!" << std::endl;
+	std::cerr << "(Note: On some systems, threads are reported the same as processors.)" << std::endl;
 
 		  #pragma omp parallel private ( thread_id ) num_threads (num_threads)
 	{
@@ -123,10 +123,10 @@ void quickOpenMPtest()
 		// not thread safe (i.e. you get race conditions)
 				#pragma omp critical
 		{
-			std::cout << "Yo, whaddup! From thread number..." << thread_id << std::endl;
+			std::cerr << "Yo, whaddup! From thread number..." << thread_id << std::endl;
 		}
 	}
-	std::cout << "Goodbye, parallel region!" << std::endl;
+	std::cerr << "Goodbye, parallel region!" << std::endl;
 		  #endif
 }
 }

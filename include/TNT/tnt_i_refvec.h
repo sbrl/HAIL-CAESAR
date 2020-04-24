@@ -100,7 +100,7 @@ i_refvec<T>::i_refvec(int n) : data_(NULL), ref_count_(NULL)
 	if (n >= 1)
 	{
 #ifdef TNT_DEBUG
-		std::cout  << "new data storage.\n";
+		std::cerr  << "new data storage.\n";
 #endif
 		data_ = new T[n];
 		ref_count_ = new int;
@@ -176,17 +176,17 @@ void i_refvec<T>::destroy()
 	if (ref_count_ != NULL)
 	{
 #ifdef TNT_DEBUG
-		std::cout << "destorying data... \n";
+		std::cerr << "destorying data... \n";
 #endif
 		delete ref_count_;
 
 #ifdef TNT_DEBUG
-		std::cout << "deleted ref_count_ ...\n";
+		std::cerr << "deleted ref_count_ ...\n";
 #endif
 		if (data_ != NULL)
 			delete []data_;
 #ifdef TNT_DEBUG
-		std::cout << "deleted data_[] ...\n";
+		std::cerr << "deleted data_[] ...\n";
 #endif
 		data_ = NULL;
 	}
@@ -240,4 +240,3 @@ i_refvec<T>::~i_refvec()
 
 #endif
 /* TNT_I_REFVEC_H */
-

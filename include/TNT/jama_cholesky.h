@@ -32,7 +32,7 @@ using namespace TNT;
 		L = chol.getL();
 		
   	else
-		cout << "factorization was not complete.\n";
+		cerr << "factorization was not complete.\n";
 
 	</pre>
 

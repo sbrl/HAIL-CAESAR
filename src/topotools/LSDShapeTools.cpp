@@ -96,17 +96,17 @@ bool SystemEndiannessTest()
 
 	if (ReconstructedTestInt == 1)
 	{
-		//cout << "Little Endian" << endl;
+		//cerr << "Little Endian" << endl;
 		return(true);
 	}
 	else if (ReconstructedTestIntSwapped == 1)
 	{
-		//cout << "Big Endian" << endl;
+		//cerr << "Big Endian" << endl;
 		return(false);
 	}
 	else
 	{
-		cout << "Unable to determine endianness of system." << endl;
+		cerr << "Unable to determine endianness of system." << endl;
 		exit(EXIT_FAILURE);
 	}
 }
@@ -170,12 +170,12 @@ PointData LoadShapefile(string Filename)
 	// This also checks if the file exists and/or can be opened for reading correctly
 	if ((file = fopen(Filename.c_str(), "rb")) == NULL)
 	{
-		cout << "Could not open specified file" << endl;
+		cerr << "Could not open specified file" << endl;
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		cout << "File opened successfully" << endl;
+		cerr << "File opened successfully" << endl;
 	}
 
 	// Get the size of the file in bytes
@@ -236,7 +236,7 @@ PointData LoadShapefile(string Filename)
 
 		if (NoOfRecords == 0)
 		{
-			cout << "Empty Shapefile. No Data to read!\n" << endl;
+			cerr << "Empty Shapefile. No Data to read!\n" << endl;
 			exit(EXIT_FAILURE);
 		}
 
@@ -287,7 +287,7 @@ PointData LoadShapefile(string Filename)
 
 		if (NoOfRecords == 0)
 		{
-			cout << "Empty Shapefile. No Data to read!\n" << endl;
+			cerr << "Empty Shapefile. No Data to read!\n" << endl;
 			exit(EXIT_FAILURE);
 		}
 
@@ -334,12 +334,12 @@ vector <PointData> LoadPolyline(string Filename)
 	// This also checks if the file exists and/or can be opened for reading correctly
 	if ((file = fopen(Filename.c_str(), "rb")) == NULL)
 	{
-		cout << "Could not open specified file" << endl;
+		cerr << "Could not open specified file" << endl;
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		cout << "File opened successfully" << endl;
+		cerr << "File opened successfully" << endl;
 	}
 
 	// Get the size of the file in bytes
@@ -383,7 +383,7 @@ vector <PointData> LoadPolyline(string Filename)
 
 		if (FileLength == 50)
 		{
-			cout << "Empty Shapefile. No Data to read!\n" << endl;
+			cerr << "Empty Shapefile. No Data to read!\n" << endl;
 			exit(EXIT_FAILURE);
 		}
 
@@ -450,7 +450,7 @@ vector <PointData> LoadPolyline(string Filename)
 
 		if (FileLength == 50)
 		{
-			cout << "Empty Shapefile. No Data to read!\n" << endl;
+			cerr << "Empty Shapefile. No Data to read!\n" << endl;
 			exit(EXIT_FAILURE);
 		}
 
@@ -496,14 +496,14 @@ vector <PointData> LoadPolyline(string Filename)
 			ByteSwap(8, ByteData + 164 + (q * 16));
 			memcpy(&TempY, ByteData + 164 + (q * 16), 8);
 
-			cout << TempX << " " << TempY << endl;
+			cerr << TempX << " " << TempY << endl;
 			Points.X.push_back(TempX);
 			Points.Y.push_back(TempY);
 		}
 
 		Polylines.push_back(Points);
 
-		cout << "---------" << endl;
+		cerr << "---------" << endl;
 
 		while (Skip < (FileLength * 2))
 		{
@@ -524,7 +524,7 @@ vector <PointData> LoadPolyline(string Filename)
 				ByteSwap(8, ByteData + Skip + 64 + (w * 16));
 				memcpy(&TempY, ByteData + Skip + 64 + (w * 16), 8);
 
-				cout << TempX << " " << TempY << endl;
+				cerr << TempX << " " << TempY << endl;
 				Points.X.push_back(TempX);
 				Points.Y.push_back(TempY);
 			}
@@ -532,7 +532,7 @@ vector <PointData> LoadPolyline(string Filename)
 			Polylines.push_back(Points);
 			Skip += (RecordLength * 2) + 8;
 
-			cout << "------" << endl;
+			cerr << "------" << endl;
 		}
 	}
 
@@ -551,7 +551,7 @@ PointData LoadChannelTree(string Filename, int multistem_option, int trib_number
 {
 	if ((multistem_option != 0) && (multistem_option != 1) && (multistem_option != 2))
 	{
-		cout << "multistem_option must be 0 (mainstem only), 1 (all tributaries) or 2 (specify channel number).  Setting mainstem only default" << endl;
+		cerr << "multistem_option must be 0 (mainstem only), 1 (all tributaries) or 2 (specify channel number).  Setting mainstem only default" << endl;
 		multistem_option = 0;
 	}
 
@@ -560,7 +560,7 @@ PointData LoadChannelTree(string Filename, int multistem_option, int trib_number
 
 	if (channel_data_in.fail())
 	{
-		cout << "\nFATAL ERROR: the channel network file \"" << Filename << "\" doesn't exist" << endl;
+		cerr << "\nFATAL ERROR: the channel network file \"" << Filename << "\" doesn't exist" << endl;
 		exit(EXIT_FAILURE);
 	}
 
@@ -928,7 +928,7 @@ void LSDCoordinateConverterLLandUTM::LLtoUTM(int eId, double Lat, double Long,
 	LongOriginRad = LongOrigin * RADIANS_PER_DEGREE;
 
 	//compute the UTM Zone from the latitude and longitude
-	cout << "Zone is  " << ZoneNumber << endl;
+	cerr << "Zone is  " << ZoneNumber << endl;
 	Zone = ZoneNumber;
 
 	eccPrimeSquared = (eccSquared) / (1 - eccSquared);
@@ -1026,7 +1026,7 @@ void LSDCoordinateConverterLLandUTM::LLtoUTM_ForceZone(int eId, double Lat, doub
 
 	if (ZoneNumber != Zone)
 	{
-		cout << "WARNING: the point is located in zone " << ZoneNumber << endl
+		cerr << "WARNING: the point is located in zone " << ZoneNumber << endl
 			 << "but you are forcing the points into Zone " << Zone << endl;
 	}
 
@@ -1099,7 +1099,7 @@ void LSDCoordinateConverterLLandUTM::UTMtoLL(int eId, double UTMNorthing, double
 	ZoneNumber = UTMZone;
 	if (not isNorth)
 	{
-		//cout << "Line 1010, you are in the Southern hemisphere!"<< endl;
+		//cerr << "Line 1010, you are in the Southern hemisphere!"<< endl;
 		//remove 10,000,000 meter offset used for southern hemisphere
 		y -= 10000000.0;
 	}
@@ -1240,11 +1240,11 @@ void LSDCoordinateConverterLLandUTM::DatumConvert(int dIn, double LatIn,
 	Z  = (N * (1 - ee) + HtIn) * sin(rad(LatIn));
 
 	//--apply delta-terms dX dY dZ
-	//cout<<"\tX:" <<X <<" Y:" <<Y <<" Z:" <<Z;    //==DEBUG
+	//cerr<<"\tX:" <<X <<" Y:" <<Y <<" Z:" <<Z;    //==DEBUG
 	X += Datums[dIn].dX - Datums[dTo].dX;
 	Y += Datums[dIn].dY - Datums[dTo].dY;
 	Z += Datums[dIn].dZ - Datums[dTo].dZ;
-	//cout<<"\tX:" <<X <<" Y:" <<Y <<" Z:" <<Z;    //==DEBUG
+	//cerr<<"\tX:" <<X <<" Y:" <<Y <<" Z:" <<Z;    //==DEBUG
 
 	//--transform back to LatLongHeight, using the "To" ellipsoid
 	a       = Ellipsoids[Datums[dTo].eId].EquatorialRadius;

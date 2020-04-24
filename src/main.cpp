@@ -48,14 +48,14 @@ using namespace LSDUtils;
 
 int main(int argc, char *argv[])
 {
-	std::cout << "##################################" << std::endl;
-	std::cout << "#  CATCHMENT HYDROGEOMORPHOLOGY  #" << std::endl;
-	std::cout << "#        MODEL version 1.0       #" << std::endl;
-	std::cout << "#          (HAIL-CAESAR)         #" << std::endl;
-	std::cout << "##################################" << std::endl;
-	std::cout << " Version: " << CHM_VERS << std::endl;
-	std::cout << " at git commit number: " GIT_REVISION << std::endl;
-	std::cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << std::endl;
+	std::cerr << "##################################" << std::endl;
+	std::cerr << "#  CATCHMENT HYDROGEOMORPHOLOGY  #" << std::endl;
+	std::cerr << "#        MODEL version 1.0       #" << std::endl;
+	std::cerr << "#          (HAIL-CAESAR)         #" << std::endl;
+	std::cerr << "##################################" << std::endl;
+	std::cerr << " Version: " << CHM_VERS << std::endl;
+	std::cerr << " at git commit number: " GIT_REVISION << std::endl;
+	std::cerr << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << std::endl;
 
 
 	// For the timing routine
@@ -70,19 +70,19 @@ int main(int argc, char *argv[])
 
 	if (argc < 3)
 	{
-		std::cout << "\n###################################################" << std::endl;
-		std::cout << "No parameter file supplied" << std::endl;
-		std::cout << "You must supply a path and parameter file!" << std::endl;
-		std::cout << "see https://dvalters.github.io/HAIL-CAESAR/" << std::endl;
-		std::cout << "for assistance." << std::endl;
-		std::cout << "###################################################" << std::endl;
+		std::cerr << "\n###################################################" << std::endl;
+		std::cerr << "No parameter file supplied" << std::endl;
+		std::cerr << "You must supply a path and parameter file!" << std::endl;
+		std::cerr << "see https://dvalters.github.io/HAIL-CAESAR/" << std::endl;
+		std::cerr << "for assistance." << std::endl;
+		std::cerr << "###################################################" << std::endl;
 
 		exit(0);                 // Game over, try again.
 	}
 
 	if (argc > 3)
 	{
-		std::cout << "Too many input arguments supplied (should be 3...)" << std::endl;
+		std::cerr << "Too many input arguments supplied (should be 3...)" << std::endl;
 		exit(0);
 	}
 
@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
 	std::string pfname(argv[2]);
 	// The path name and the parameter file name, respectively.
 	// Remember: argc[0] is the program name that you just typed in to the terminal.
-	std::cout << "The pathname is: " << pname
+	std::cerr << "The pathname is: " << pname
 			  << " and the parameter file is: " << pfname << std::endl;
 
 	// Create a catchment model object initialising the model
@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
 	simulation.print_parameters();
 
 	// Entering the main loop here
-	std::cout << "Entering main model loop..." << std::endl;
+	std::cerr << "Entering main model loop..." << std::endl;
 	do
 	{
 		// Simulation iteration functions
@@ -178,13 +178,13 @@ int main(int argc, char *argv[])
 		// if we have reached the end of the simulation, stop the loop
 	} while (simulation.get_cycle() / 60 < simulation.get_maxcycle());
 
-	std::cout << "THE SIMULATION IS FINISHED!" << std::endl;
+	std::cerr << "THE SIMULATION IS FINISHED!" << std::endl;
 
 	// Timing routine for parallel
   #ifdef OMP_COMPILE_FOR_PARALLEL
 	double end_time            = omp_get_wtime();
 	double simulation_run_time = (end_time - start_time) / 60;
-	std::cout << "The simulation ran in " << simulation_run_time <<				  \
+	std::cerr << "The simulation ran in " << simulation_run_time <<				  \
 		" minutes. This includes everything executed within the main() function." \
 			  << std::endl;
   #endif

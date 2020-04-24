@@ -220,7 +220,7 @@ class band_matrix
 // spline s;
 // s.set_points(X,Y);    // currently it is required that X is already sorted
 // double x=1.5;
-// cout << "spline at " << x << " is: " << s(x) <<endl;
+// cerr << "spline at " << x << " is: " << s(x) <<endl;
 //
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 class spline

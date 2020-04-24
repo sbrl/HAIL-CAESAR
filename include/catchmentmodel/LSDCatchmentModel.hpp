@@ -59,7 +59,7 @@ public:
   /// @date 2015-01-16
   LSDCatchmentModel(string pname, string pfname)
   {
-    std::cout << "The constructor has been called..." << std::endl;
+    std::cerr << "The constructor has been called..." << std::endl;
     create(pname, pfname);
   }
 

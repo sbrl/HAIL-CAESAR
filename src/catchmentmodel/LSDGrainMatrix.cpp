@@ -43,7 +43,7 @@
 
 /*void LSDGrainMatrix::create()
  * {
- * std::cout << "You are trying to create an LSDGrainMatrix object with no supplied files or parameters." << std::endl << "Exiting..." << std::endl;
+ * std::cerr << "You are trying to create an LSDGrainMatrix object with no supplied files or parameters." << std::endl << "Exiting..." << std::endl;
  * exit(EXIT_FAILURE);
  * }*/
 
@@ -53,7 +53,7 @@ void LSDGrainMatrix::create(int imax, int jmax, int NoDataVal, int G_MAX)
 	NCols        = jmax;
 	NoData       = NoDataVal;
 	GrainFracMax = G_MAX;
-	std::cout << "Initialised a Grain Matrix..." << std::endl;
+	std::cerr << "Initialised a Grain Matrix..." << std::endl;
 }
 
 void LSDGrainMatrix::write_grainMatrix_to_ascii_file(std::string filename,
@@ -62,7 +62,7 @@ void LSDGrainMatrix::write_grainMatrix_to_ascii_file(std::string filename,
 	std::string string_filename;
 	std::string dot = ".";
 	string_filename = filename + dot + fname_extension;
-	std::cout << "The graindata filename is: " << string_filename << std::endl;
+	std::cerr << "The graindata filename is: " << string_filename << std::endl;
 
 	if (fname_extension == "asc")
 	{
@@ -71,7 +71,7 @@ void LSDGrainMatrix::write_grainMatrix_to_ascii_file(std::string filename,
 
 		if (data_out.fail())
 		{
-			std::cout << "\n ERREUR FATALE!!!: Unable to write to " << string_filename \
+			std::cerr << "\n ERREUR FATALE!!!: Unable to write to " << string_filename \
 					  << std::endl;
 			exit(EXIT_FAILURE);
 		}
@@ -80,7 +80,7 @@ void LSDGrainMatrix::write_grainMatrix_to_ascii_file(std::string filename,
 		{
 			for (int j = 1; j <= NCols; ++j)
 			{
-				//std::cout << rasterIndex[i][j] << ", " << NoData << std::endl;
+				//std::cerr << rasterIndex[i][j] << ", " << NoData << std::endl;
 				if (rasterIndex[i][j] != NoData)
 				{
 					// Write the first part of the output file line (x,y location and index)
@@ -89,7 +89,7 @@ void LSDGrainMatrix::write_grainMatrix_to_ascii_file(std::string filename,
 					// Now write the Surface Grain bit
 					for (int inc = 0; inc <= GrainFracMax; inc++)
 					{
-						//std::cout << rasterIndex[i][j] << std::endl;
+						//std::cerr << rasterIndex[i][j] << std::endl;
 						data_out << grainData[rasterIndex[i][j]][inc] << " ";
 					}
 
@@ -110,7 +110,7 @@ void LSDGrainMatrix::write_grainMatrix_to_ascii_file(std::string filename,
 
 	else
 	{
-		std::cout << "You did not enter and approprate extension!" << std::endl
+		std::cerr << "You did not enter and approprate extension!" << std::endl
 				  << "You entered: " << fname_extension << ", options are: asc" << std::endl;
 		exit(EXIT_FAILURE);
 	}

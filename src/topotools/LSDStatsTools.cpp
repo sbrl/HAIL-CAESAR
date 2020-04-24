@@ -95,7 +95,7 @@ using namespace JAMA;
 
 float ran3(long *idum)
 {
-	//cout << &idum << endl;
+	//cerr << &idum << endl;
 	static int  inext, inextp;
 	static long ma[56];
 	static int  iff = 0;
@@ -351,7 +351,7 @@ vector <float> sample_without_replacement(vector <float> population_vector, int 
 	int            Population = population_vector.size();
 	if (N > Population)
 	{
-		cout << "N>Population size, try again" << endl;
+		cerr << "N>Population size, try again" << endl;
 		exit(EXIT_FAILURE);
 	}
 
@@ -384,7 +384,7 @@ vector <int> sample_without_replacement(vector <int> population_vector, int N)
 	int          Population = population_vector.size();
 	if (N > Population)
 	{
-		cout << "N>Population size, try again" << endl;
+		cerr << "N>Population size, try again" << endl;
 		exit(EXIT_FAILURE);
 	}
 
@@ -727,7 +727,7 @@ void get_peak_indices(vector <float>& y_data, float threshold, int distance, vec
 		{
 			peak_indices_temp.push_back(i);
 			peak_values_temp.push_back(y_data[i]);
-			//cout << "Potential peak value: " << y_data[i] << " Peak index: " << i << endl;
+			//cerr << "Potential peak value: " << y_data[i] << " Peak index: " << i << endl;
 		}
 	}
 
@@ -787,7 +787,7 @@ void get_peak_indices(vector <float>& y_data, float threshold, int distance, vec
 			{
 				//copy to final vector
 				peak_indices.push_back(i);
-				//cout << "Removed small peaks, Peak value: " << y_data[i] << " Peak index: " << i << endl;
+				//cerr << "Removed small peaks, Peak value: " << y_data[i] << " Peak index: " << i << endl;
 			}
 		}
 	}
@@ -886,7 +886,7 @@ void quantile_quantile_analysis(vector <float>& data, vector <float>& values, ve
 	float q75y = get_percentile(vals, 75);
 
 	float slope = (q75y - q25y) / (q75x - q25x);
-//   cout << "slope = " << slope << endl;
+//   cerr << "slope = " << slope << endl;
 	float          centerx   = (q25x + q75x) / 2;
 	float          centery   = (q25y + q75y) / 2;
 	float          intercept = centery - slope * centerx;
@@ -935,10 +935,10 @@ void quantile_quantile_analysis_defined_percentiles(vector <float>& data, vector
 	float q_upper_x = get_percentile(snv, upper_percentile);
 	float q_lower_y = get_percentile(vals, lower_percentile);
 	float q_upper_y = get_percentile(vals, upper_percentile);
-	cout << "q_lower_x: " << q_lower_x << " q_lower_y: " << q_lower_y << " q_upper_x: " << q_upper_x << " q_upper_y: " << q_upper_y << endl;
+	cerr << "q_lower_x: " << q_lower_x << " q_lower_y: " << q_lower_y << " q_upper_x: " << q_upper_x << " q_upper_y: " << q_upper_y << endl;
 
 	float slope = (q_upper_y - q_lower_y) / (q_upper_x - q_lower_x);
-//   cout << "slope = " << slope << endl;
+//   cerr << "slope = " << slope << endl;
 	float          centerx   = (q_lower_x + q_upper_x) / 2;
 	float          centery   = (q_lower_y + q_upper_y) / 2;
 	float          intercept = centery - slope * centerx;
@@ -1118,11 +1118,11 @@ vector <float> simple_linear_regression(vector <float>& x_data, vector <float>& 
 
 	if (n_x != n_y)
 	{
-		cout << "WARNING simple_linear_regression x and y vecs no the same size. Prepare for segmentation!" << endl;
+		cerr << "WARNING simple_linear_regression x and y vecs no the same size. Prepare for segmentation!" << endl;
 	}
 	if (n_x == 0)
 	{
-		cout << "WARNING simple_linear_regression I haven't got x data! Prepare for segmentation!" << endl;
+		cerr << "WARNING simple_linear_regression I haven't got x data! Prepare for segmentation!" << endl;
 	}
 
 
@@ -1152,8 +1152,8 @@ vector <float> simple_linear_regression(vector <float>& x_data, vector <float>& 
 
 	if (solution.dim1() == 0)
 	{
-		cout << "WARNING simple_linear_regression Solution data is empty! Prepare for segmentation!" << endl;
-		cout << "Dimensions are: n_x: " << n_x << " solution matrix: " << solution.dim1() << " " << solution.dim2() << endl;
+		cerr << "WARNING simple_linear_regression Solution data is empty! Prepare for segmentation!" << endl;
+		cerr << "Dimensions are: n_x: " << n_x << " solution matrix: " << solution.dim1() << " " << solution.dim2() << endl;
 	}
 
 
@@ -1173,7 +1173,7 @@ vector <float> simple_linear_regression(vector <float>& x_data, vector <float>& 
 	// get predicted, residuals, etc
 	float SS_reg = 0;
 	float SS_err = 0;
-	//cout << endl;
+	//cerr << endl;
 	for (int i = 0; i < n_rows; i++)
 	{
 		predicted.push_back(soln[0] * x_data[i] + soln[1]);
@@ -1186,7 +1186,7 @@ vector <float> simple_linear_regression(vector <float>& x_data, vector <float>& 
 
 		SS_err += temp_residuals[i] * temp_residuals[i];
 
-		//cout << "RESIDUAL, i: " << i << " pred: " << predicted[i] << " data: " << y_data[i] << " resid: " << temp_residuals[i] << endl;
+		//cerr << "RESIDUAL, i: " << i << " pred: " << predicted[i] << " data: " << y_data[i] << " resid: " << temp_residuals[i] << endl;
 	}
 
 	// now get R^2
@@ -1273,28 +1273,28 @@ double interp1D_ordered(vector <double>& x, vector <double>& y, double x_interp_
 
 	if (n_nodes != y_nodes)
 	{
-		cout << "Trying to interpolate but the vectors are not the same size!" << endl;
-		cout << "Defaulting to y[0]" << endl;
+		cerr << "Trying to interpolate but the vectors are not the same size!" << endl;
+		cerr << "Defaulting to y[0]" << endl;
 		y_interp = y[0];
 	}
 	else if (n_nodes == 1)
 	{
-		cout << "Trying to interpolate you have only given me a single datapoint" << endl;
-		cout << "Defaulting to y[0]" << endl;
+		cerr << "Trying to interpolate you have only given me a single datapoint" << endl;
+		cerr << "Defaulting to y[0]" << endl;
 		y_interp = y[0];
 	}
 	else
 	{
 		if (x_interp_loc < x[0])
 		{
-			cout << "Interpolation point is outside bounds (too small) of x vector!" << endl;
-			cout << "Defaulting to y[0]" << endl;
+			cerr << "Interpolation point is outside bounds (too small) of x vector!" << endl;
+			cerr << "Defaulting to y[0]" << endl;
 			y_interp = y[0];
 		}
 		else if (x_interp_loc > x[n_nodes - 1])
 		{
-			cout << "Interpolation point is outside bounds (too big) of x vector!" << endl;
-			cout << "Defaulting to y[n_nodes-1]" << endl;
+			cerr << "Interpolation point is outside bounds (too big) of x vector!" << endl;
+			cerr << "Defaulting to y[n_nodes-1]" << endl;
 			y_interp = y[n_nodes - 1];
 		}
 		else
@@ -1308,8 +1308,8 @@ double interp1D_ordered(vector <double>& x, vector <double>& y, double x_interp_
 			} while (x_interp_loc > x[i]);
 
 			// we are now at the correct node. Get the interpolant
-			//cout << "xi loc: " << x_interp_loc << " and x: " << x[i] << endl;
-			//cout << "i: " << i << " x[i] " << x[i] << " x[i-1]: " << x[i-1]
+			//cerr << "xi loc: " << x_interp_loc << " and x: " << x[i] << endl;
+			//cerr << "i: " << i << " x[i] " << x[i] << " x[i-1]: " << x[i-1]
 			//     << " y[i]: " << y[i] << " y[i-1]: " << y[i-1] << endl;
 			y_interp = y[i - 1] + (y[i] - y[i - 1]) * ((x_interp_loc - x[i - 1]) / (x[i] - x[i - 1]));
 		}
@@ -1346,28 +1346,28 @@ float interp1D_ordered(vector <float>& x, vector <float>& y, float x_interp_loc)
 
 	if (n_nodes != y_nodes)
 	{
-		cout << "Trying to interpolate but the vectors are not the same size!" << endl;
-		cout << "Defaulting to y[0]" << endl;
+		cerr << "Trying to interpolate but the vectors are not the same size!" << endl;
+		cerr << "Defaulting to y[0]" << endl;
 		y_interp = y[0];
 	}
 	else if (n_nodes == 1)
 	{
-		cout << "Trying to interpolate you have only given me a single datapoint" << endl;
-		cout << "Defaulting to y[0]" << endl;
+		cerr << "Trying to interpolate you have only given me a single datapoint" << endl;
+		cerr << "Defaulting to y[0]" << endl;
 		y_interp = y[0];
 	}
 	else
 	{
 		if (x_interp_loc < x[0])
 		{
-			cout << "Interpolation point is outside bounds (too small) of x vector!" << endl;
-			cout << "Defaulting to y[0]" << endl;
+			cerr << "Interpolation point is outside bounds (too small) of x vector!" << endl;
+			cerr << "Defaulting to y[0]" << endl;
 			y_interp = y[0];
 		}
 		else if (x_interp_loc > x[n_nodes - 1])
 		{
-			cout << "Interpolation point is outside bounds (too big) of x vector!" << endl;
-			cout << "Defaulting to y[n_nodes-1]" << endl;
+			cerr << "Interpolation point is outside bounds (too big) of x vector!" << endl;
+			cerr << "Defaulting to y[n_nodes-1]" << endl;
 			y_interp = y[n_nodes - 1];
 		}
 		else
@@ -1381,8 +1381,8 @@ float interp1D_ordered(vector <float>& x, vector <float>& y, float x_interp_loc)
 			} while (x_interp_loc > x[i]);
 
 			// we are now at the correct node. Get the interpolant
-			//cout << "xi loc: " << x_interp_loc << " and x: " << x[i] << endl;
-			//cout << "i: " << i << " x[i] " << x[i] << " x[i-1]: " << x[i-1]
+			//cerr << "xi loc: " << x_interp_loc << " and x: " << x[i] << endl;
+			//cerr << "i: " << i << " x[i] " << x[i] << " x[i-1]: " << x[i-1]
 			//     << " y[i]: " << y[i] << " y[i-1]: " << y[i-1] << endl;
 			y_interp = y[i - 1] + (y[i] - y[i - 1]) * ((x_interp_loc - x[i - 1]) / (x[i] - x[i - 1]));
 		}
@@ -1554,7 +1554,7 @@ double interp2D_bilinear(vector <double>& x_locs, vector <double>& y_locs, Array
 
 	if (data.dim1() != n_xlocs || data.dim2() != n_ylocs)
 	{
-		cout << "Trying to do bilinear interpolation but data is not the same size" << endl
+		cerr << "Trying to do bilinear interpolation but data is not the same size" << endl
 			 << "as the x and y location vectors" << endl
 			 << "returning ndv = -9999" << endl;
 	}
@@ -1567,13 +1567,13 @@ double interp2D_bilinear(vector <double>& x_locs, vector <double>& y_locs, Array
 		// reverse to positive order if reversed
 		if (x_locs[0] > x_locs[1])
 		{
-			//cout << "Reversing x" << endl;
+			//cerr << "Reversing x" << endl;
 			is_x_reversed = true;
 			reverse(x_locs.begin(), x_locs.end());
 		}
 		if (y_locs[0] > y_locs[1])
 		{
-			//cout << "Reversing y" << endl;
+			//cerr << "Reversing y" << endl;
 			is_y_reversed = true;
 			reverse(y_locs.begin(), y_locs.end());
 		}
@@ -1581,13 +1581,13 @@ double interp2D_bilinear(vector <double>& x_locs, vector <double>& y_locs, Array
 		// first find the index of the x data
 		if (x_interp < x_locs[0])
 		{
-			cout << "x is too small for 2D interpolation, defaulting to ndv" << endl;
-			cout << "x_locs[0]" << x_locs[0] << " x interp: " << x_interp << endl;
+			cerr << "x is too small for 2D interpolation, defaulting to ndv" << endl;
+			cerr << "x_locs[0]" << x_locs[0] << " x interp: " << x_interp << endl;
 			x_index = ndv_index;
 		}
 		else if (x_interp > x_locs[n_xlocs - 1])
 		{
-			cout << "x is too big for 2D interpolation, defaulting to ndv";
+			cerr << "x is too big for 2D interpolation, defaulting to ndv";
 			x_index = ndv_index;
 		}
 		else
@@ -1598,7 +1598,7 @@ double interp2D_bilinear(vector <double>& x_locs, vector <double>& y_locs, Array
 			do
 			{
 				i++;
-				//cout << "lat: " << x_interp << " i: " << i << " lat[i]: " << x_locs[i] << endl;
+				//cerr << "lat: " << x_interp << " i: " << i << " lat[i]: " << x_locs[i] << endl;
 			} while (x_interp > x_locs[i]);
 			x_index = i;
 		}
@@ -1606,14 +1606,14 @@ double interp2D_bilinear(vector <double>& x_locs, vector <double>& y_locs, Array
 		// now get the index of the y data
 		if (y_interp < y_locs[0])
 		{
-			cout << "y is too small for 2D interpolation, defaulting to ndv" << endl;
-			cout << "y_locs[0]" << y_locs[0] << " y interp: " << y_interp << endl;
+			cerr << "y is too small for 2D interpolation, defaulting to ndv" << endl;
+			cerr << "y_locs[0]" << y_locs[0] << " y interp: " << y_interp << endl;
 			y_index = ndv_index;
 		}
 		else if (y_interp > y_locs[n_ylocs - 1])
 		{
-			cout << "y is too big for 2D interpolation, defaulting to ndv";
-			cout << "y[0]: " << y_locs[0] << " y_locs[n_ylocs-1]: " << y_locs[n_ylocs - 1] << endl;
+			cerr << "y is too big for 2D interpolation, defaulting to ndv";
+			cerr << "y[0]: " << y_locs[0] << " y_locs[n_ylocs-1]: " << y_locs[n_ylocs - 1] << endl;
 			y_index = ndv_index;
 		}
 		else
@@ -1624,7 +1624,7 @@ double interp2D_bilinear(vector <double>& x_locs, vector <double>& y_locs, Array
 			do
 			{
 				i++;
-				//cout << "long: " << x_interp << " i: " << i << " long[i]: " << y_locs[i] << endl;
+				//cerr << "long: " << x_interp << " i: " << i << " long[i]: " << y_locs[i] << endl;
 			} while (y_interp > y_locs[i]);
 			y_index = i;
 		}
@@ -1666,11 +1666,11 @@ double interp2D_bilinear(vector <double>& x_locs, vector <double>& y_locs, Array
 			yis = y_index - 1;
 		}
 
-		// some debugging couts
-		//cout << "Data at end: " << data[n_xlocs-1][n_ylocs-1] << endl;
-		//cout << "x_index is: " << x_index << " and y_index is: " << y_index << endl;
-		//cout << "x1: " << x1 << " x2: " << x2 << " y1: " << y1 << " y2: " << y2 << endl;
-		//cout << "xib: " << xib << " xis: " << xis << " yib: " << yib << " yis: " << yis << endl;
+		// some debugging cerrs
+		//cerr << "Data at end: " << data[n_xlocs-1][n_ylocs-1] << endl;
+		//cerr << "x_index is: " << x_index << " and y_index is: " << y_index << endl;
+		//cerr << "x1: " << x1 << " x2: " << x2 << " y1: " << y1 << " y2: " << y2 << endl;
+		//cerr << "xib: " << xib << " xis: " << xis << " yib: " << yib << " yis: " << yis << endl;
 
 		// now you need to calculate the interpolated point
 		// see  http://en.wikipedia.org/wiki/Bilinear_interpolation
@@ -1679,7 +1679,7 @@ double interp2D_bilinear(vector <double>& x_locs, vector <double>& y_locs, Array
 		double Q12 = data[xis][yib];
 		double Q22 = data[xib][yib];
 
-		//cout << "Q11: " << Q11 << " Q21: " << Q21 << " Q12: " << Q12 << " Q22: " << Q22 << endl;
+		//cerr << "Q11: " << Q11 << " Q21: " << Q21 << " Q12: " << Q12 << " Q22: " << Q22 << endl;
 
 		double R1 = ((x2 - x_interp) / (x2 - x1)) * Q11 + ((x_interp - x1) / (x2 - x1)) * Q21;
 		double R2 = ((x2 - x_interp) / (x2 - x1)) * Q12 + ((x_interp - x1) / (x2 - x1)) * Q22;
@@ -1714,7 +1714,7 @@ float interp2D_bilinear(vector <float>& x_locs, vector <float>& y_locs, Array2D 
 
 	if (data.dim1() != n_xlocs || data.dim2() != n_ylocs)
 	{
-		cout << "Trying to do bilinear interpolation but data is not the same size" << endl
+		cerr << "Trying to do bilinear interpolation but data is not the same size" << endl
 			 << "as the x and y location vectors" << endl
 			 << "returning ndv = -9999" << endl;
 	}
@@ -1740,12 +1740,12 @@ float interp2D_bilinear(vector <float>& x_locs, vector <float>& y_locs, Array2D 
 		// first find the index of the x data
 		if (x_interp < x_locs[0])
 		{
-			cout << "x is too small for 2D interpolation, defaulting to ndv";
+			cerr << "x is too small for 2D interpolation, defaulting to ndv";
 			x_index = ndv_index;
 		}
 		else if (x_interp > x_locs[n_xlocs - 1])
 		{
-			cout << "x is too big for 2D interpolation, defaulting to ndv";
+			cerr << "x is too big for 2D interpolation, defaulting to ndv";
 			x_index = ndv_index;
 		}
 		else
@@ -1756,7 +1756,7 @@ float interp2D_bilinear(vector <float>& x_locs, vector <float>& y_locs, Array2D 
 			do
 			{
 				i++;
-				//cout << "lat: " << x_interp << " i: " << i << " lat[i]: " << x_locs[i] << endl;
+				//cerr << "lat: " << x_interp << " i: " << i << " lat[i]: " << x_locs[i] << endl;
 			} while (x_interp > x_locs[i]);
 			x_index = i;
 		}
@@ -1764,13 +1764,13 @@ float interp2D_bilinear(vector <float>& x_locs, vector <float>& y_locs, Array2D 
 		// now get the index of the y data
 		if (y_interp < y_locs[0])
 		{
-			cout << "y is too small for 2D interpolation, defaulting to ndv";
+			cerr << "y is too small for 2D interpolation, defaulting to ndv";
 			y_index = ndv_index;
 		}
 		else if (y_interp > y_locs[n_ylocs - 1])
 		{
-			cout << "y is too big for 2D interpolation, defaulting to ndv";
-			cout << "y[0]: " << y_locs[0] << " y_locs[n_ylocs-1]: " << y_locs[n_ylocs - 1] << endl;
+			cerr << "y is too big for 2D interpolation, defaulting to ndv";
+			cerr << "y[0]: " << y_locs[0] << " y_locs[n_ylocs-1]: " << y_locs[n_ylocs - 1] << endl;
 			y_index = ndv_index;
 		}
 		else
@@ -1781,7 +1781,7 @@ float interp2D_bilinear(vector <float>& x_locs, vector <float>& y_locs, Array2D 
 			do
 			{
 				i++;
-				//cout << "long: " << x_interp << " i: " << i << " long[i]: " << y_locs[i] << endl;
+				//cerr << "long: " << x_interp << " i: " << i << " long[i]: " << y_locs[i] << endl;
 			} while (y_interp > y_locs[i]);
 			y_index = i;
 		}
@@ -1823,11 +1823,11 @@ float interp2D_bilinear(vector <float>& x_locs, vector <float>& y_locs, Array2D 
 			yis = y_index - 1;
 		}
 
-		// some debugging couts
-		//cout << "Data at end: " << data[n_xlocs-1][n_ylocs-1] << endl;
-		//cout << "x_index is: " << x_index << " and y_index is: " << y_index << endl;
-		//cout << "x1: " << x1 << " x2: " << x2 << " y1: " << y1 << " y2: " << y2 << endl;
-		//cout << "xib: " << xib << " xis: " << xis << " yib: " << yib << " yis: " << yis << endl;
+		// some debugging cerrs
+		//cerr << "Data at end: " << data[n_xlocs-1][n_ylocs-1] << endl;
+		//cerr << "x_index is: " << x_index << " and y_index is: " << y_index << endl;
+		//cerr << "x1: " << x1 << " x2: " << x2 << " y1: " << y1 << " y2: " << y2 << endl;
+		//cerr << "xib: " << xib << " xis: " << xis << " yib: " << yib << " yis: " << yis << endl;
 
 		// now you need to calculate the interpolated point
 		// see  http://en.wikipedia.org/wiki/Bilinear_interpolation
@@ -1836,7 +1836,7 @@ float interp2D_bilinear(vector <float>& x_locs, vector <float>& y_locs, Array2D 
 		float Q12 = data[xis][yib];
 		float Q22 = data[xib][yib];
 
-		//cout << "Q11: " << Q11 << " Q21: " << Q21 << " Q12: " << Q12 << " Q22: " << Q22 << endl;
+		//cerr << "Q11: " << Q11 << " Q21: " << Q21 << " Q12: " << Q12 << " Q22: " << Q22 << endl;
 
 		float R1 = ((x2 - x_interp) / (x2 - x1)) * Q11 + ((x_interp - x1) / (x2 - x1)) * Q21;
 		float R2 = ((x2 - x_interp) / (x2 - x1)) * Q12 + ((x_interp - x1) / (x2 - x1)) * Q22;
@@ -2218,7 +2218,7 @@ std::vector <double> band_matrix::lu_solve(const std::vector <double>& b,
 // spline s;
 // s.set_points(X,Y);    // currently it is required that X is already sorted
 // double x=1.5;
-// cout << "spline at " << x << " is: " << s(x) <<endl;
+// cerr << "spline at " << x << " is: " << s(x) <<endl;
 //
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 void spline::set_points(const std::vector <double>& x,
@@ -2362,9 +2362,9 @@ vector <vector <vector <int> > > partition_driver_to_vecvecvec(int k, int minimu
 	vector <vector <vector <int> > > partitions(max_segments);
 
 	// run the partitioning code
-	cout << "partition_driver_to_vecvecvec, doing partitions" << endl;
+	cerr << "partition_driver_to_vecvecvec, doing partitions" << endl;
 	partitions_with_minimum_length(n, k, t, minimum_length, p, partitions);
-	cout << "partition_driver_to_vecvecvec, finished partitions" << endl;
+	cerr << "partition_driver_to_vecvecvec, finished partitions" << endl;
 
 	return(partitions);
 }
@@ -2496,9 +2496,9 @@ void partition_print(int t, vector <int>& p)
 {
 	for (int i = 1; i <= t; i++)
 	{
-		cout << p[i] << " ";
+		cerr << p[i] << " ";
 	}
-	cout << endl;
+	cerr << endl;
 }
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -2506,40 +2506,40 @@ void partition_print(int t, vector <int>& p)
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 void partition_vecvecvec_print(vector <vector <vector <int> > >& partitions)
 {
-	cout << "n_possible_segments: " << partitions.size() << endl;
+	cerr << "n_possible_segments: " << partitions.size() << endl;
 	vector <vector <int> > partition_vecvec;
 	for (int i = 0; i < int(partitions.size()); i++)
 	{
 		partition_vecvec = partitions[i];
 		int n_partitions_this_nsegments = partition_vecvec.size();
-		//cout << "n_segments: " << i+1 << " and number of partitions of this n segments: " << n_partitions_this_nsegments << endl;
+		//cerr << "n_segments: " << i+1 << " and number of partitions of this n segments: " << n_partitions_this_nsegments << endl;
 		for (int j = 0; j < n_partitions_this_nsegments; j++)
 		{
 			vector <int> individual_partition = partition_vecvec[j];
 			int          sz_ind_partition     = individual_partition.size();
 			for (int k = 0; k < sz_ind_partition; k++)
 			{
-				cout << individual_partition[k] << " ";
+				cerr << individual_partition[k] << " ";
 			}
-			cout << endl;
+			cerr << endl;
 		}
 	}
 }
 
 void partition_vecvecvec_print_with_permutation(vector <vector <vector <int> > >& partitions)
 {
-	cout << "n_possible_segments: " << partitions.size() << endl;
+	cerr << "n_possible_segments: " << partitions.size() << endl;
 	vector <vector <int> > partition_vecvec;
 	for (int i = 0; i < int(partitions.size()); i++)
 	{
 		partition_vecvec = partitions[i];
 		int n_partitions_this_nsegments = partition_vecvec.size();
-		cout << "n_segments: " << i + 1 << " and number of partitions of this n segments: " << n_partitions_this_nsegments << endl;
+		cerr << "n_segments: " << i + 1 << " and number of partitions of this n segments: " << n_partitions_this_nsegments << endl;
 		for (int j = 0; j < n_partitions_this_nsegments; j++)
 		{
 			vector <int> individual_partition = partition_vecvec[j];
 			permute_partitioned_integer_vector(individual_partition);
-			cout << endl;
+			cerr << endl;
 		}
 	}
 }
@@ -2556,17 +2556,17 @@ void permute_partitioned_integer_vector(vector <int> permute_vector)
 
 	//for (int i = 0; i<n_elements; i++)
 	//{
-	//  cout << permute_vector[i] << " ";
+	//  cerr << permute_vector[i] << " ";
 	//}
-	//cout << endl;
+	//cerr << endl;
 
 	do
 	{
 		for (int i = 0; i < n_elements; i++)
 		{
-			cout << permute_vector[i] << " ";
+			cerr << permute_vector[i] << " ";
 		}
-		cout << endl;
+		cerr << endl;
 	} while (prev_permutation(permute_vector.begin(), permute_vector.end()));
 }
 
@@ -2599,8 +2599,8 @@ void calculate_segment_matrices(vector <float>& all_x_data, vector <float>& all_
 
 	if (minimum_segment_length > n_data_points)
 	{
-		cout << "LSDStatsTools find_linear_segments: your segment length is greater than half the number of data points" << endl;
-		cout << "This means that there can only be overlapping segments. Changing segment length to maximum segment length " << endl;
+		cerr << "LSDStatsTools find_linear_segments: your segment length is greater than half the number of data points" << endl;
+		cerr << "This means that there can only be overlapping segments. Changing segment length to maximum segment length " << endl;
 		minimum_segment_length = n_data_points;
 	}
 
@@ -2621,7 +2621,7 @@ void calculate_segment_matrices(vector <float>& all_x_data, vector <float>& all_
 	// populate the matrix.
 	// the get segment row function is recursive so it moves down through all the possible
 	// starting nodes
-	//cout << "LINE 518, sigma is: " << sigma << endl;
+	//cerr << "LINE 518, sigma is: " << sigma << endl;
 	populate_segment_matrix(start_node, end_node, no_data_value, all_x_data, all_y_data, minimum_segment_length,
 							sigma, like_array, m_array, b_array, rsquared_array, DW_array);
 }
@@ -2673,11 +2673,11 @@ void populate_segment_matrix(int start_node, int end_node, float no_data_value,
 		segment_y.assign(vec_iter_start, vec_iter_end);
 
 		// do the least squares regression on this segment
-		// cout << "LINE 568, sigma is: " << sigma << endl;
+		// cerr << "LINE 568, sigma is: " << sigma << endl;
 		regression_results = simple_linear_regression(segment_x, segment_y, residuals);
 		this_MLE           = calculate_MLE_from_residuals(residuals, sigma);
 
-		//cout << "LINE 584 doing start: " << start_node << " end: " << end_node << endl;
+		//cerr << "LINE 584 doing start: " << start_node << " end: " << end_node << endl;
 
 		like_array[start_node][end_node]     = this_MLE;
 		m_array[start_node][end_node]        = regression_results[0];
@@ -2719,7 +2719,7 @@ void populate_segment_matrix(int start_node, int end_node, float no_data_value,
 				b_array[start_node][loop_end]        = regression_results[1];
 				rsquared_array[start_node][loop_end] = regression_results[2];
 				DW_array[start_node][loop_end]       = regression_results[3];
-				//cout << "LINE 612 doing start: " << start_node << " end: " << loop_end << endl;
+				//cerr << "LINE 612 doing start: " << start_node << " end: " << loop_end << endl;
 
 				// now get the row from the next segment
 				populate_segment_matrix(loop_end + 1, end_node, no_data_value,
@@ -2753,10 +2753,10 @@ void best_fit_driver_AIC_for_linear_segments(int minimum_segment_length, float s
 	Array2D <float> rsquared_array;     // array holding R2 of individual segments
 	Array2D <float> DW_array;           // array holding the durbin-watson statistic of indiviudal segments
 
-	cout << "best_fit_driver_AIC_for_linear_segments, getting like data" << endl;
+	cerr << "best_fit_driver_AIC_for_linear_segments, getting like data" << endl;
 	calculate_segment_matrices(all_x_data, all_y_data, minimum_segment_length,
 							   norm_sigma, like_array, m_array, b_array, rsquared_array, DW_array);
-	cout << "best_fit_driver_AIC_for_linear_segments, got like data" << endl;
+	cerr << "best_fit_driver_AIC_for_linear_segments, got like data" << endl;
 
 	vector <float>         one_sig_max_MLE;
 	vector <float>         AIC_of_segments;
@@ -2805,12 +2805,12 @@ void best_fit_driver_AIC_for_linear_segments(int minimum_segment_length, float s
 										r2_values, rsquared_array, DW_values, DW_array);
 
 	// now print this data
-	cout << "sigma is: " << sigma_values[n_sigma_for_printing]
+	cerr << "sigma is: " << sigma_values[n_sigma_for_printing]
 		 << " one_sig MLE: " << one_sig_max_MLE[best_fit_AICc[n_sigma_for_printing]]
 		 << " and the number of segments is: " << best_fit_AICc[n_sigma_for_printing] + 1 << endl;
 	for (int i = 0; i < best_fit_AICc[n_sigma_for_printing] + 1; i++)
 	{
-		cout << m_values[i] << " " << b_values[i] << " " << r2_values[i] << " " << DW_values[i] << endl;
+		cerr << m_values[i] << " " << b_values[i] << " " << r2_values[i] << " " << DW_values[i] << endl;
 	}
 }
 
@@ -2891,46 +2891,46 @@ void print_AIC_and_AICc_to_screen(vector <float> sigma_values, vector <vector <i
 	int            n_mins;
 
 
-	cout << endl << "LSDStatsTools print_AIC_and_AICc_to_screen" << endl;
+	cerr << endl << "LSDStatsTools print_AIC_and_AICc_to_screen" << endl;
 
 	// loop through sigma values printing the best fits
 	for (int i = 0; i < n_sigs; i++)
 	{
-		cout << endl << endl << "sigma is: " << sigma_values[i] << endl;
+		cerr << endl << endl << "sigma is: " << sigma_values[i] << endl;
 		AI_values = AIC_for_each_n_segments[i];
 		AI_sz     = int(AI_values.size());
-		cout << "Min AIC node is: " << best_fit_AIC[i] << " and AIC values: ";
+		cerr << "Min AIC node is: " << best_fit_AIC[i] << " and AIC values: ";
 		for (int j = 0; j < AI_sz; j++)
 		{
-			cout << AI_values[j] << " ";
+			cerr << AI_values[j] << " ";
 		}
-		cout << endl;
+		cerr << endl;
 
-		cout << "the segments lengths are: ";
+		cerr << "the segments lengths are: ";
 		this_minimum = segments_for_each_n_segments[best_fit_AIC[i]];
 		n_mins       = best_fit_AIC[i] + 1;
 		for (int seg = 0; seg < n_mins; seg++)
 		{
-			cout << this_minimum[seg] << " ";
+			cerr << this_minimum[seg] << " ";
 		}
-		cout << endl;
+		cerr << endl;
 
-		cout << "Min AICc node is: " << best_fit_AICc[i] << " and AICc values: ";
+		cerr << "Min AICc node is: " << best_fit_AICc[i] << " and AICc values: ";
 		AI_values = AICc_for_each_n_segments[i];
 		for (int j = 0; j < AI_sz; j++)
 		{
-			cout << AI_values[j] << " ";
+			cerr << AI_values[j] << " ";
 		}
-		cout << endl;
+		cerr << endl;
 
-		cout << "the segments lengths are: ";
+		cerr << "the segments lengths are: ";
 		this_minimum = segments_for_each_n_segments[best_fit_AICc[i]];
 		n_mins       = best_fit_AICc[i] + 1;
 		for (int seg = 0; seg < n_mins; seg++)
 		{
-			cout << this_minimum[seg] << " ";
+			cerr << this_minimum[seg] << " ";
 		}
-		cout << endl;
+		cerr << endl;
 	}
 }
 
@@ -3037,8 +3037,8 @@ void find_max_like_of_segments(int minimum_segment_length, Array2D <float>& like
 
 	if (minimum_segment_length > n_data_points)
 	{
-		cout << "LSDStatsTools find_max_AIC_of_segments: your segment length is greater than the number of data points" << endl;
-		cout << "This means that there can only be overlapping segments. Changing segment length to minimum segment length " << endl;
+		cerr << "LSDStatsTools find_max_AIC_of_segments: your segment length is greater than the number of data points" << endl;
+		cerr << "This means that there can only be overlapping segments. Changing segment length to minimum segment length " << endl;
 		minimum_segment_length = n_data_points;
 	}
 
@@ -3052,9 +3052,9 @@ void find_max_like_of_segments(int minimum_segment_length, Array2D <float>& like
 	vector <vector <int> > most_likely_segments(max_n_segments);
 
 	// create the partition data element
-	//cout << "find_max_like_of_segments, getting partitions" << endl;
+	//cerr << "find_max_like_of_segments, getting partitions" << endl;
 	vector <vector <vector <int> > > partitions = partition_driver_to_vecvecvec(n_data_points, minimum_segment_length);
-	//cout << "find_max_like_of_segments, got partitions" << endl;
+	//cerr << "find_max_like_of_segments, got partitions" << endl;
 
 	// now loop through the number of segments, calucalting the maximum likelihood each time
 	vector <vector <int> > partition_vecvec;
@@ -3064,10 +3064,10 @@ void find_max_like_of_segments(int minimum_segment_length, Array2D <float>& like
 	{
 		partition_vecvec = partitions[n_elem];
 		int n_partitions_this_nsegments = partition_vecvec.size();
-		//cout << "n_segments: " << n_elem+1 << " and number of partitions of this n segments: " << n_partitions_this_nsegments << endl;
+		//cerr << "n_segments: " << n_elem+1 << " and number of partitions of this n segments: " << n_partitions_this_nsegments << endl;
 		for (int n_partition = 0; n_partition < n_partitions_this_nsegments; n_partition++)
 		{
-			//cout << "number of partitions: " << n_partition+1 << " of " << n_partitions_this_nsegments << endl;
+			//cerr << "number of partitions: " << n_partition+1 << " of " << n_partitions_this_nsegments << endl;
 			vector <int> individual_partition = partition_vecvec[n_partition];
 			int          n_elements           = individual_partition.size();
 
@@ -3079,18 +3079,18 @@ void find_max_like_of_segments(int minimum_segment_length, Array2D <float>& like
 				for (int i = 0; i < n_elements; i++)
 				{
 					end_node = start_node + individual_partition[i] - 1;
-					//cout << "start node: " << start_node << " " << " end node: " << end_node
+					//cerr << "start node: " << start_node << " " << " end node: " << end_node
 					//     << " and like: " << like_array[start_node][end_node] << endl;
 					this_MLE   = this_MLE * like_array[start_node][end_node];
 					start_node = end_node + 1;
 				}
-				//cout << "This MLE: " << this_MLE << " seg MLE: " << MLE_for_segments[n_elem] << endl;
+				//cerr << "This MLE: " << this_MLE << " seg MLE: " << MLE_for_segments[n_elem] << endl;
 
 				// now test if this MLE is better than the the best MLE so far for this number of
 				// partitions
 				if (this_MLE > MLE_for_segments[n_elem])
 				{
-					//cout << "element is: " << n_elem << " new MLE" << endl;
+					//cerr << "element is: " << n_elem << " new MLE" << endl;
 					MLE_for_segments[n_elem]     = this_MLE;
 					most_likely_segments[n_elem] = individual_partition;
 				}
@@ -3134,7 +3134,7 @@ void get_properties_of_best_fit_segments(int bestfit_segments_node, vector <vect
 	for (int i = 0; i < n_segments; i++)
 	{
 		end_node = start_node + individual_partition[i] - 1;
-		cout << "start node: " << start_node << " " << " end node: " << end_node
+		cerr << "start node: " << start_node << " " << " end node: " << end_node
 			 << " m: " << m_array[start_node][end_node] << " b: " << b_array[start_node][end_node]
 			 << " r^2: " << rsquared_array[start_node][end_node]
 			 << " DW: " << DW_array[start_node][end_node] << endl;
@@ -3180,14 +3180,14 @@ void calculate_AIC_of_segments_with_normalized_sigma(float sigma,
 		}
 		else
 		{
-			//cout << "n_segs: " << n_elem+1
+			//cerr << "n_segs: " << n_elem+1
 			//   << " MLE: " <<  new_sig_MLE[n_elem] << " log: "
 			//   << log( new_sig_MLE[n_elem]) << " 2nd term: "
 			//   << -2*log( new_sig_MLE[n_elem]) << endl;
 			AIC[n_elem]  = 2 * AICk - 2 * log(new_sig_MLE[n_elem]);
 			AICc[n_elem] = AIC[n_elem] + 2 * AICk * (AICk + 1) / (AICn - AICk - 1);
 		}
-		//cout << "AIC: " << AIC[n_elem] << " and AICc: " << AICc[n_elem] << endl << endl;
+		//cerr << "AIC: " << AIC[n_elem] << " and AICc: " << AICc[n_elem] << endl << endl;
 	}
 	AIC_of_segments  = AIC;
 	AICc_of_segments = AICc;
@@ -3201,23 +3201,23 @@ void print_to_screen_most_likeley_segment_lengths(vector <vector <int> > segment
 {
 	// loop through the number of segments, printing the
 	// most likeley segment lengths to screen
-	cout << endl << "printing most likeley segment lenghts: " << endl;
+	cerr << endl << "printing most likeley segment lenghts: " << endl;
 	for (int n_elem = 0; n_elem < int(segments_for_each_n_segments.size()); n_elem++)
 	{
-		cout << "n elements: " << n_elem << " and MLE: " << MLE_for_segments[n_elem] << endl;
+		cerr << "n elements: " << n_elem << " and MLE: " << MLE_for_segments[n_elem] << endl;
 		vector <int> individual_partition = segments_for_each_n_segments[n_elem];
-		cout << "segment lengths: " << individual_partition.size() << endl;
+		cerr << "segment lengths: " << individual_partition.size() << endl;
 		if (int(individual_partition.size()) != n_elem + 1)
 		{
-			cout << "LINE 707 statstools something is wrong n partitions is incorrect" << endl;
+			cerr << "LINE 707 statstools something is wrong n partitions is incorrect" << endl;
 		}
 
 		for (int i = 0; i <= n_elem; i++)
 		{
-			cout << individual_partition[i] << " ";
+			cerr << individual_partition[i] << " ";
 		}
 	}
-	cout << endl << "finished printing most likeley segment lengths" << endl;
+	cerr << endl << "finished printing most likeley segment lengths" << endl;
 }
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -3234,8 +3234,8 @@ void find_max_AIC_of_segments(int minimum_segment_length, vector <float>& all_x_
 
 	if (minimum_segment_length > n_data_points)
 	{
-		cout << "LSDStatsTools find_max_AIC_of_segments: your segment length is greater than the number of data points" << endl;
-		cout << "This means that there can only be overlapping segments. Changing segment length to minimum segment length " << endl;
+		cerr << "LSDStatsTools find_max_AIC_of_segments: your segment length is greater than the number of data points" << endl;
+		cerr << "This means that there can only be overlapping segments. Changing segment length to minimum segment length " << endl;
 		minimum_segment_length = n_data_points;
 	}
 
@@ -3259,7 +3259,7 @@ void find_max_AIC_of_segments(int minimum_segment_length, vector <float>& all_x_
 	{
 		partition_vecvec = partitions[n_elem];
 		int n_partitions_this_nsegments = partition_vecvec.size();
-		//cout << "n_segments: " << n_elem+1 << " and number of partitions of this n segments: " << n_partitions_this_nsegments << endl;
+		//cerr << "n_segments: " << n_elem+1 << " and number of partitions of this n segments: " << n_partitions_this_nsegments << endl;
 		for (int n_partition = 0; n_partition < n_partitions_this_nsegments; n_partition++)
 		{
 			vector <int> individual_partition = partition_vecvec[n_partition];
@@ -3273,18 +3273,18 @@ void find_max_AIC_of_segments(int minimum_segment_length, vector <float>& all_x_
 				for (int i = 0; i < n_elements; i++)
 				{
 					end_node = start_node + individual_partition[i] - 1;
-					//cout << "start node: " << start_node << " " << " end node: " << end_node
+					//cerr << "start node: " << start_node << " " << " end node: " << end_node
 					//     << " and like: " << like_array[start_node][end_node] << endl;
 					this_MLE   = this_MLE * like_array[start_node][end_node];
 					start_node = end_node + 1;
 				}
-				//cout << "This MLE: " << this_MLE << " seg MLE: " << MLE_for_segments[n_elem] << endl;
+				//cerr << "This MLE: " << this_MLE << " seg MLE: " << MLE_for_segments[n_elem] << endl;
 
 				// now test if this MLE is better than the the best MLE so far for this number of
 				// partitions
 				if (this_MLE > MLE_for_segments[n_elem])
 				{
-					//cout << "element is: " << n_elem << " new MLE" << endl;
+					//cerr << "element is: " << n_elem << " new MLE" << endl;
 					MLE_for_segments[n_elem]     = this_MLE;
 					most_likely_segments[n_elem] = individual_partition;
 				}
@@ -3298,19 +3298,19 @@ void find_max_AIC_of_segments(int minimum_segment_length, vector <float>& all_x_
 	vector <float> AICc(partitions.size(), 0.0);
 	for (int n_elem = 0; n_elem < int(partitions.size()); n_elem++)
 	{
-		cout << "n elements: " << n_elem << " and MLE: " << MLE_for_segments[n_elem] << endl;
+		cerr << "n elements: " << n_elem << " and MLE: " << MLE_for_segments[n_elem] << endl;
 		vector <int> individual_partition = most_likely_segments[n_elem];
-		cout << "segment lengths: " << individual_partition.size() << endl;
+		cerr << "segment lengths: " << individual_partition.size() << endl;
 		if (int(individual_partition.size()) != n_elem + 1)
 		{
-			cout << "LINE 707 statstools something is wrong n partitions is incorrect" << endl;
+			cerr << "LINE 707 statstools something is wrong n partitions is incorrect" << endl;
 		}
 
 		for (int i = 0; i <= n_elem; i++)
 		{
-			cout << individual_partition[i] << " ";
+			cerr << individual_partition[i] << " ";
 		}
-		cout << endl;
+		cerr << endl;
 
 		float AICk = (float(n_elem) + 1);
 		float AICn = float(all_x_data.size());
@@ -3323,13 +3323,13 @@ void find_max_AIC_of_segments(int minimum_segment_length, vector <float>& all_x_
 		}
 		else
 		{
-			cout << "MLE: " << MLE_for_segments[n_elem] << " log: "
+			cerr << "MLE: " << MLE_for_segments[n_elem] << " log: "
 				 << log(MLE_for_segments[n_elem]) << " 2nd term: "
 				 << -2 * log(MLE_for_segments[n_elem]) << endl;
 			AIC[n_elem]  = 2 * AICk - 2 * log(MLE_for_segments[n_elem]);
 			AICc[n_elem] = AIC[n_elem] + 2 * AICk * (AICk + 1) / (AICn - AICk - 1);
 		}
-		cout << "AIC: " << AIC[n_elem] << " and AICc: " << AICc[n_elem] << endl << endl;
+		cerr << "AIC: " << AIC[n_elem] << " and AICc: " << AICc[n_elem] << endl << endl;
 	}
 
 	segments_for_each_n_segments = most_likely_segments;
@@ -3350,8 +3350,8 @@ void generate_random_segments(float sigma, int minimum_n_nodes, int mean_segment
 {
 	if (segment_range > 2 * mean_segment_length)
 	{
-		cout << "generate_random_segments LSDStatstools.cpp, segment range will result in negative segment lengths" << endl;
-		cout << " changing to maximum segment length allowed" << endl;
+		cerr << "generate_random_segments LSDStatstools.cpp, segment range will result in negative segment lengths" << endl;
+		cerr << " changing to maximum segment length allowed" << endl;
 		segment_range = 2 * mean_segment_length - 2;
 	}
 	long seed = time(NULL);
@@ -3376,7 +3376,7 @@ void generate_random_segments(float sigma, int minimum_n_nodes, int mean_segment
 
 		nodes_in_segments.push_back(this_segment_length);
 		total_nodes += this_segment_length;
-		cout << "this segment length is: " << this_segment_length << " and total nodes: " << total_nodes << endl;
+		cerr << "this segment length is: " << this_segment_length << " and total nodes: " << total_nodes << endl;
 	}
 
 	// now loop through each segment adding x and y data
@@ -3420,7 +3420,7 @@ void generate_random_segments(float sigma, int minimum_n_nodes, int mean_segment
 
 		vector <float> residuals;
 		vector <float> lr = simple_linear_regression(segment_x_data, segment_y_data, residuals);
-		cout << "Imposed m: " << this_m << " and regressed m: " << lr[0] << " and b: " << lr[1] << endl;
+		cerr << "Imposed m: " << this_m << " and regressed m: " << lr[0] << " and b: " << lr[1] << endl;
 		intercept_of_segments.push_back(lr[1]);
 
 		// add the segment to all_x_data
@@ -3432,19 +3432,19 @@ void generate_random_segments(float sigma, int minimum_n_nodes, int mean_segment
 	}
 
 	// now superimpose noise
-	cout << endl << endl;
-	cout << "n_nodes: " << total_nodes << " and in all_x_data: " << all_x_data.size() << endl;
+	cerr << endl << endl;
+	cerr << "n_nodes: " << total_nodes << " and in all_x_data: " << all_x_data.size() << endl;
 	for (int node = 0; node < total_nodes; node++)
 	{
 		all_y_data[node] += sigma * (ran3(&seed) - 0.5);
-		cout << all_x_data[node] << " " << all_y_data[node] << endl;
+		cerr << all_x_data[node] << " " << all_y_data[node] << endl;
 	}
-	cout << endl << endl;
+	cerr << endl << endl;
 
-	cout << endl << endl << "n_segments: " << n_segments << endl;
+	cerr << endl << endl << "n_segments: " << n_segments << endl;
 	for (int i = 0; i < n_segments; i++)
 	{
-		cout << "segment: " << i << " has " << nodes_in_segments[i]
+		cerr << "segment: " << i << " has " << nodes_in_segments[i]
 			 << "  with slope: " << slope_of_segments[i]
 			 << " and intercept: " << intercept_of_segments[i] << endl;
 	}
@@ -3480,8 +3480,8 @@ void find_linear_segments(vector <float>& all_x_data, vector <float>& all_y_data
 
 	if (segment_length > n_data_points)
 	{
-		cout << "LSDStatsTools find_linear_segments: your segment length is greater than half the number of data points" << endl;
-		cout << "This means that there can only be overlapping segments. Changing segment length to maximum segment length " << endl;
+		cerr << "LSDStatsTools find_linear_segments: your segment length is greater than half the number of data points" << endl;
+		cerr << "This means that there can only be overlapping segments. Changing segment length to maximum segment length " << endl;
 		segment_length = int(float(n_data_points) / 2);
 	}
 
@@ -3527,8 +3527,8 @@ void find_linear_segments(vector <float>& all_x_data, vector <float>& all_y_data
 		segment_DW_stat.push_back(regression_data[3]);
 
 		// print to screen
-		cout << segment << " " << regression_data[0] << " " << regression_data[1] << " ";
-		cout << regression_data[2] << " " << regression_data[3] << endl;
+		cerr << segment << " " << regression_data[0] << " " << regression_data[1] << " ";
+		cerr << regression_data[2] << " " << regression_data[3] << endl;
 	}
 
 	// now loop through segments seeing if there is a transition.
@@ -3580,9 +3580,9 @@ void find_linear_segments(vector <float>& all_x_data, vector <float>& all_y_data
 		calibrated_segment_DW_stat.push_back(regression_data[3]);
 
 		// print to screen
-		cout << endl << "and now for the claibrated segments" << endl;
-		cout << calib_segment << " " << regression_data[0] << " " << regression_data[1] << " ";
-		cout << regression_data[2] << " " << regression_data[3] << endl;
+		cerr << endl << "and now for the claibrated segments" << endl;
+		cerr << calib_segment << " " << regression_data[0] << " " << regression_data[1] << " ";
+		cerr << regression_data[2] << " " << regression_data[3] << endl;
 	}
 }
 
@@ -3595,7 +3595,7 @@ float calculate_MLE(vector <float>& measured, vector <float>& modelled, vector <
 
 	for (int i = 0; i < n_samples; i++)
 	{
-		//cout << "exp term: " << -0.5*(measured[i]-modelled[i])*(measured[i]-modelled[i])/
+		//cerr << "exp term: " << -0.5*(measured[i]-modelled[i])*(measured[i]-modelled[i])/
 		//               sigma[i]*sigma[i] << endl;
 		MLE_tot = MLE_tot * exp(-0.5 * (measured[i] - modelled[i]) * (measured[i] - modelled[i]) /
 								(sigma[i] * sigma[i]));
@@ -3621,7 +3621,7 @@ float calculate_MLE(vector <float>& measured, vector <float>& modelled, float si
 // get the least squared maximum likelihood estimator based on residuals
 float calculate_MLE_from_residuals(vector <float>& residuals, float sigma)
 {
-	//cout << "sigma is: " << sigma << endl;
+	//cerr << "sigma is: " << sigma << endl;
 
 	// get the number of samples
 	int   n_samples = residuals.size();
@@ -3657,13 +3657,13 @@ bool atobool(string value)
 	bool this_bool = false;
 
 
-	//cout << "The value is: " << value << endl;
+	//cerr << "The value is: " << value << endl;
 	//string lower_val = value;
 	//lower_val[0] = tolower(value[0]);
 	//if (lower_val[0] == "t" || lower_val[0] == "1")
 	if (value == "True" || value == "true" || value == "TRUE" || value == "1")
 	{
-		//cout << "Hey I found a true!!" << endl;
+		//cerr << "Hey I found a true!!" << endl;
 		this_bool = true;
 	}
 
@@ -3881,7 +3881,7 @@ void log_bin_data(vector <float>& InputVectorX, vector <float>& InputVectorY, fl
 	float max_X  = InputVectorX[n_data - 1];
 	float min_X  = InputVectorX[1];
 
-	//cout << "LSDStatsTools line 1757, n_data_X: " << n_data << " and Y: " << InputVectorX.size() << endl;
+	//cerr << "LSDStatsTools line 1757, n_data_X: " << n_data << " and Y: " << InputVectorX.size() << endl;
 
 	for (int i = 0; i < n_data; ++i)
 	{
@@ -3936,8 +3936,8 @@ void log_bin_data(vector <float>& InputVectorX, vector <float>& InputVectorY, fl
 				// Get bin_id for this particular value of X
 				int bin_id = int(((log10(X)) - lower_limit) / log_bin_width);
 
-				//cout << "LINE 1818, bin id: " << bin_id << " i: " << i << " XDsz: " << X_data.size() << " YDsz: " << Y_data.size() << endl;
-				//cout << "LINE 1819, bdxsz: " << binned_data_X.size() << " bdysz: " << binned_data_Y.size() << endl << endl;
+				//cerr << "LINE 1818, bin id: " << bin_id << " i: " << i << " XDsz: " << X_data.size() << " YDsz: " << Y_data.size() << endl;
+				//cerr << "LINE 1819, bdxsz: " << binned_data_X.size() << " bdysz: " << binned_data_Y.size() << endl << endl;
 				// Store X and corresponding Y into this bin, for their respective
 				// vector<vector> object
 				binned_data_X[bin_id].push_back(X);
@@ -4054,7 +4054,7 @@ void bin_data(vector <float>& InputVectorX, vector <float>& InputVectorY, float 
 	float max_X  = InputVectorX[n_data - 1];
 	float min_X  = InputVectorX[1];
 
-	cout << "LSDStatsTools line 1757, n_data_X: " << InputVectorX.size() << " and Y: " << InputVectorY.size() << endl;
+	cerr << "LSDStatsTools line 1757, n_data_X: " << InputVectorX.size() << " and Y: " << InputVectorY.size() << endl;
 
 	for (int i = 0; i < n_data; ++i)
 	{
@@ -4076,7 +4076,7 @@ void bin_data(vector <float>& InputVectorX, vector <float>& InputVectorY, float 
 		lower_limit = 0;
 	}
 	int NBins = int((upper_limit - lower_limit) / bin_width ) + 1;
-	cout << "Upper limit: " << upper_limit << " Lower limit: " << lower_limit << " NBins: " << NBins << endl;
+	cerr << "Upper limit: " << upper_limit << " Lower limit: " << lower_limit << " NBins: " << NBins << endl;
 
 	// Looping through all the rows and columns and calculating which bin the
 	// contributing area is in, and putting the slope in this bin
@@ -4113,11 +4113,11 @@ void bin_data(vector <float>& InputVectorX, vector <float>& InputVectorY, float 
 			{
 				// Get bin_id for this particular value of X
 				int bin_id = int((X - lower_limit) / bin_width);
-				//cout << "X: " << X << " Y: " << Y << " bin_id: " << bin_id << endl;
+				//cerr << "X: " << X << " Y: " << Y << " bin_id: " << bin_id << endl;
 				if (bin_id >= 0)
 				{
-					//cout << "LINE 1818, bin id: " << bin_id << " i: " << i << " XDsz: " << X_data.size() << " YDsz: " << Y_data.size() << endl;
-					//cout << "LINE 1819, bdxsz: " << binned_data_X.size() << " bdysz: " << binned_data_Y.size() << endl << endl;
+					//cerr << "LINE 1818, bin id: " << bin_id << " i: " << i << " XDsz: " << X_data.size() << " YDsz: " << Y_data.size() << endl;
+					//cerr << "LINE 1819, bdxsz: " << binned_data_X.size() << " bdysz: " << binned_data_Y.size() << endl << endl;
 					// Store X and corresponding Y into this bin, for their respective
 					// vector<vector> object
 					binned_data_X[bin_id].push_back(X);
@@ -4143,7 +4143,7 @@ void bin_data(vector <float>& InputVectorX, vector <float>& InputVectorY, float 
 		{
 			MeanY[bin_id] = Y_data[bin_id] / number_observations[bin_id];
 			MeanX[bin_id] = X_data[bin_id] / number_observations[bin_id];
-			//cout << "No observations in bin: " << number_observations[bin_id] << endl;
+			//cerr << "No observations in bin: " << number_observations[bin_id] << endl;
 		}
 	}
 
@@ -4308,7 +4308,7 @@ void print_histogram(vector <float> input_values, float bin_width, string filena
 			min_X = input_values[i];
 		}
 	}
-//  cout << min_X << " " << max_X << endl;
+//  cerr << min_X << " " << max_X << endl;
 	// Defining the upper limit, lower limit and the bin width.
 	// Extend range by one bin at each end so that the histogram is bounded by
 	// zeros for plotting
@@ -4338,7 +4338,7 @@ void print_histogram(vector <float> input_values, float bin_width, string filena
 		int bin_id = int((X - lower_limit) / bin_width);
 		if (input_values[i] != input_values[i])
 		{
-			cout << "FOUND NAN - skipping" << endl;
+			cerr << "FOUND NAN - skipping" << endl;
 			++n_nan;
 		}
 		else
@@ -4360,13 +4360,13 @@ void print_histogram(vector <float> input_values, float bin_width, string filena
 	}
 
 	// Print histogram to file
-	cout << "\t printing histogram to " << filename << endl;
+	cerr << "\t printing histogram to " << filename << endl;
 	ofstream ofs;
 	ofs.open(filename.c_str());
 
 	if (ofs.fail())
 	{
-		cout << "\nFATAL ERROR: unable to write output_file" << endl;
+		cerr << "\nFATAL ERROR: unable to write output_file" << endl;
 		exit(EXIT_FAILURE);
 	}
 
@@ -4430,7 +4430,7 @@ void calculate_histogram(vector <float> input_values, float bin_width, vector <f
 		int bin_id = int((X - lower_limit) / bin_width);
 		if (input_values[i] != input_values[i])
 		{
-			cout << "FOUND NAN - skipping" << endl;
+			cerr << "FOUND NAN - skipping" << endl;
 			++n_nan;
 		}
 		else
@@ -4487,7 +4487,7 @@ void calculate_histogram_fixed_limits(vector <float> input_values, float bin_wid
 		{
 			if (input_values[i] != input_values[i])
 			{
-				cout << "FOUND NAN - skipping" << endl;
+				cerr << "FOUND NAN - skipping" << endl;
 				++n_nan;
 			}
 			else
@@ -4652,7 +4652,7 @@ void log_bin_data(vector <float>& vector1, vector <float>& vector2, float log_bi
 	binned_data      = binned_vector1;
 	bin_vector1_mean = binned_vector1_mean;
 	bin_vector2_mean = binned_vector2_mean;
-	cout << "\t\t\t\t\t\t log binning complete!" << endl;
+	cerr << "\t\t\t\t\t\t log binning complete!" << endl;
 }
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -5213,10 +5213,10 @@ void parse_line(ifstream&infile, string&parameter, string&value)
 	{
 		if (pos >= 128)
 		{
-			cout << "Buffer overrun, word too long in parameter line: " << endl;
+			cerr << "Buffer overrun, word too long in parameter line: " << endl;
 			string line;
 			getline(infile, line);
-			cout << "\t" << buff << " ! \n" << line << endl;
+			cerr << "\t" << buff << " ! \n" << line << endl;
 			exit(1);
 		}
 		// preceeding whitespace
@@ -5598,7 +5598,7 @@ float PKS(float z)
 {
 	if (z < 0.0)
 	{
-		cout << "Bad z value." << endl;
+		cerr << "Bad z value." << endl;
 		exit(EXIT_FAILURE);
 	}
 
@@ -5740,7 +5740,7 @@ float MannWhitneyUTest(vector <float>& sampleA, vector <float>& sampleB)
 
 	//for(int i = 0; i<int(all_samples.size()); i++)
 	//{
-	//  cout << "samp["<<i<< "]: " << all_samples[i] << " and indices: " << all_samples_indices[i] << endl;
+	//  cerr << "samp["<<i<< "]: " << all_samples[i] << " and indices: " << all_samples_indices[i] << endl;
 	//}
 
 	// initiate vectors for sorting
@@ -5766,13 +5766,13 @@ float MannWhitneyUTest(vector <float>& sampleA, vector <float>& sampleB)
 	//int n_data = int(ranks.size());
 	//for(int i = 0; i< n_data; i++)
 	//{
-	//  cout << "data["<<i<<"]: " << sorted_samples[i] << " rank: " << ranks[i]
+	//  cerr << "data["<<i<<"]: " << sorted_samples[i] << " rank: " << ranks[i]
 	//       << " sorted_index: " << sorted_indices[i] << endl;
 	//}
 
 	//for(int i = 0; i<n_groups; i++)
 	//{
-	//  cout << "Group of " << number_in_groups[i] << endl;
+	//  cerr << "Group of " << number_in_groups[i] << endl;
 	//}
 
 
@@ -5787,16 +5787,16 @@ float MannWhitneyUTest(vector <float>& sampleA, vector <float>& sampleB)
 		if (sorted_indices[i] == 0)
 		{
 			sum_sample1 += ranks[i];
-			//cout << "SR1: " << sum_sample1 << endl;
+			//cerr << "SR1: " << sum_sample1 << endl;
 		}
 		else
 		{
 			sum_sample2 += ranks[i];
-			//cout << "SR2: " << sum_sample2 << endl;
+			//cerr << "SR2: " << sum_sample2 << endl;
 		}
 	}
 
-	//cout << "sum_ranks1: " << sum_sample1 << " sum_ranks2: " << sum_sample2 << endl;
+	//cerr << "sum_ranks1: " << sum_sample1 << " sum_ranks2: " << sum_sample2 << endl;
 
 	// now calculate the U values
 	// see: http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U_test
@@ -5807,13 +5807,13 @@ float MannWhitneyUTest(vector <float>& sampleA, vector <float>& sampleB)
 	float multiplen = float(n_sample_A * n_sample_B);
 	if (sumU != multiplen)
 	{
-		cout << "Something has gone wrong since the sum of the ranks does not"
+		cerr << "Something has gone wrong since the sum of the ranks does not"
 			 << " equal the multplile of the number of elements" << endl
 			 << "U_1: " << U_1 << " U_2: " << U_2 << " n1: " << n_sample_A
 			 << " n2: " << n_sample_B << endl;
 	}
 
-	//cout << "U_1: " << U_1 << " U_2: " << U_2 << " n1: " << n_sample_A
+	//cerr << "U_1: " << U_1 << " U_2: " << U_2 << " n1: " << n_sample_A
 	//     << " n2: " << n_sample_B << endl;
 
 	float U;
@@ -5837,7 +5837,7 @@ float MannWhitneyUTest(vector <float>& sampleA, vector <float>& sampleB)
 		group_sum = float(number_in_groups[g] * number_in_groups[g] * number_in_groups[g]
 						  - number_in_groups[g]) / 12.0;
 	}
-	//cout << "group_sum_is: " << group_sum << endl;
+	//cerr << "group_sum_is: " << group_sum << endl;
 	float std_dev_U;
 	if (group_sum == 0)
 	{
@@ -5850,14 +5850,14 @@ float MannWhitneyUTest(vector <float>& sampleA, vector <float>& sampleB)
 		float std_dev_U_second_term = float(total_samples * total_samples * total_samples - total_samples) / 12.0;
 		std_dev_U = sqrt(std_dev_U_first_term * (std_dev_U_second_term - group_sum));
 	}
-	//cout << "mean is: " << mean << " and std_dev_u is: " << std_dev_U << endl;
+	//cerr << "mean is: " << mean << " and std_dev_u is: " << std_dev_U << endl;
 
 	float z_value = (U - mean) / std_dev_U;
-	//cout << "Z_value is: " << z_value << endl;
+	//cerr << "Z_value is: " << z_value << endl;
 	float p_value = pValueNormalDistribution(z_value);
 
 
-	//cout << "U: " << U << " and p: " << p_value << endl;
+	//cerr << "U: " << U << " and p: " << p_value << endl;
 
 	return(p_value);
 }
@@ -5896,7 +5896,7 @@ void rank_vector_with_groups(vector <float> sorted_data,
 		if (this_sample == last_sample)
 		{
 			n_in_this_group++;
-			//cout << "n_in_this_group: " << n_in_this_group << endl;
+			//cerr << "n_in_this_group: " << n_in_this_group << endl;
 
 			// if it is a new group, push back the group sizes vector
 			if (n_in_this_group == 2)
@@ -5908,7 +5908,7 @@ void rank_vector_with_groups(vector <float> sorted_data,
 				// there are more than 2 in this group, add one to the final element
 				// in the group list
 				viter = repeat_group_sizes.end() - 1;
-				//cout << "incrementing group, " << (*viter) << endl;
+				//cerr << "incrementing group, " << (*viter) << endl;
 				(*viter) = n_in_this_group;
 			}
 
@@ -5970,12 +5970,12 @@ void Count_Instances(vector <int> Data, vector <int> Key_Values, map <int, int>&
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==
 int get_file_size(string filename) // path to file
 {
-	//cout << "Opening file: " << filename << endl;
+	//cerr << "Opening file: " << filename << endl;
 	FILE *p_file = NULL;
 
 	p_file = fopen(filename.c_str(), "rb");
 	fseek(p_file, 0, SEEK_END);
-	//cout << "Getting the end" << endl;
+	//cerr << "Getting the end" << endl;
 	int size = ftell(p_file);
 	fclose(p_file);
 	return(size);
@@ -6024,7 +6024,7 @@ vector <string> ReadCSVHeader(string path, string fname)
 
 	if (ifs.fail())
 	{
-		cout << "\nFATAL ERROR: Trying to load csv cosmo data file, but the file" << filename
+		cerr << "\nFATAL ERROR: Trying to load csv cosmo data file, but the file" << filename
 			 << "doesn't exist; LINE 245 LSDCosmoData" << endl;
 		exit(EXIT_FAILURE);
 	}
@@ -6130,15 +6130,15 @@ string FixPath(string PathtoFix)
 
 	string slash = "/";
 
-	//cout << "Checking pathname, pathname is: " << noContrl << endl;
-	//cout << "lchar is " << lchar << " and slash is " << slash << endl;
+	//cerr << "Checking pathname, pathname is: " << noContrl << endl;
+	//cerr << "lchar is " << lchar << " and slash is " << slash << endl;
 
 	if (lchar != slash)
 	{
-		//cout << "You forgot the frontslash at the end of the path. Appending." << endl;
+		//cerr << "You forgot the frontslash at the end of the path. Appending." << endl;
 		noContrl = noContrl + slash;
 	}
-	//cout << "The pathname is: " << pathname << endl;
+	//cerr << "The pathname is: " << pathname << endl;
 	return(noContrl);
 }
 
@@ -6151,13 +6151,13 @@ string FixPath(string PathtoFix)
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 string ReformatPath(string old_path)
 {
-	cout << "The old path was: " << old_path << endl;
+	cerr << "The old path was: " << old_path << endl;
 	string path = old_path;
 	//path.replace( path.begin(), path.end(), "\\", "/"); // replace all '//' to '/'
 	//path.replace( path.begin(), path.end(), "\\", "/"); // replace all '\\' to '/'
-	cout << "The new path is: " << path << endl;
+	cerr << "The new path is: " << path << endl;
 
-	cout << "THIS DOES NOT WORK!!!!!!!! LINE 5296 LSDStatstools" << endl;
+	cerr << "THIS DOES NOT WORK!!!!!!!! LINE 5296 LSDStatstools" << endl;
 
 
 	return(path);
@@ -6189,12 +6189,12 @@ float inverfc(float p)
 
 	if (p >= 2.0)
 	{
-		cout << "ERROR - arguement outside permitted range - returning arbitrary value = 100\n";
+		cerr << "ERROR - arguement outside permitted range - returning arbitrary value = 100\n";
 		return(100);
 	}
 	if (p <= 0.0)
 	{
-		cout << "ERROR - arguement outside permitted range - returning arbitrary value = -100\n";
+		cerr << "ERROR - arguement outside permitted range - returning arbitrary value = -100\n";
 		return(-100);
 	}
 	pp = (p < 1.0) ? p : 2. - p;
@@ -6683,7 +6683,7 @@ struct tm Parse_time_string(string time_string)
 	month = atoi(space_break[1].c_str());
 	day   = atoi(space_break[2].c_str());
 
-	cout << year << "," << month << "," << day << ",";
+	cerr << year << "," << month << "," << day << ",";
 
 	// now get the Y-M-D data
 	stringstream ss3(hm_string);
@@ -6699,7 +6699,7 @@ struct tm Parse_time_string(string time_string)
 	hour   = atoi(hs_break[0].c_str());
 	minute = atoi(hs_break[1].c_str());
 
-	cout << hour << "," << minute << endl;
+	cerr << hour << "," << minute << endl;
 
 	struct tm *timeinfo;
 
