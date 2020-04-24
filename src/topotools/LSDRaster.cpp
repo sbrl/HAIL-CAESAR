@@ -3001,7 +3001,7 @@ Array2D <float> LSDRaster::Shadow(int theta, int phi)
 LSDRaster LSDRaster::TopographicShielding()
 {
 	//For default parameters
-	printf("LSDRaster::%s: No input argumments provided, defaulting to Azimuth/Zenith stepsize of 5 degrees\n", __func__);
+	("LSDRaster::%s: No input argumments provided, defaulting to Azimuth/Zenith stepsize of 5 degrees\n", __func__);
 	int AzimuthStep = 5;
 	int PhiStep     = 5;
 	return(this->TopographicShielding(AzimuthStep, PhiStep));
@@ -3010,7 +3010,7 @@ LSDRaster LSDRaster::TopographicShielding()
 LSDRaster LSDRaster::TopographicShielding(int AzimuthStep, int ZenithStep)
 {
 	//Function print to screen
-	printf("\nLSDRaster::%s: AzimuthStep: %d, ZenithStep: %d\n", __func__, AzimuthStep, ZenithStep);
+	fprintf(stderr, "\nLSDRaster::%s: AzimuthStep: %d, ZenithStep: %d\n", __func__, AzimuthStep, ZenithStep);
 
 	//declare constants
 	float m = 2.3;         //shielding constant
@@ -3034,8 +3034,8 @@ LSDRaster LSDRaster::TopographicShielding(int AzimuthStep, int ZenithStep)
 	{
 		for (int AzimuthAngle = AzimuthStep; AzimuthAngle <= 360; AzimuthAngle += AzimuthStep)
 		{
-			fflush(stdout);
-			printf("\nAzimuth: %d, Zenith: %d - ", AzimuthAngle, ZenithAngle);
+			fflush(stderr);
+			fprintf(stderr, "\nAzimuth: %d, Zenith: %d - ", AzimuthAngle, ZenithAngle);
 
 			//Find cells in shadow (1s and 0s)
 			Array2D <float> ShadowsArray;
@@ -3084,7 +3084,7 @@ LSDRaster LSDRaster::TopographicShielding(int AzimuthStep, int ZenithStep)
 //LSDRaster LSDRaster::TopographicShielding(int theta_step, int phi_step)
 //{
 //  //Print to screen
-//  printf("LSDRaster::%s\n",__func__);
+//  fprintf(stderr, "LSDRaster::%s\n",__func__);
 //
 //  //calculate parameter of scaling calculation
 //  int phi_factor = 360/phi_step;
@@ -3170,7 +3170,7 @@ LSDRaster LSDRaster::CastShadows(int Azimuth, int ZenithAngle)
 
 Array2D <float> LSDRaster::Shadows(int Azimuth, int ZenithAngle)
 {
-	printf("LSDRaster::%s: ", __func__);
+	fprintf(stderr, "LSDRaster::%s: ", __func__);
 
 	//Declare coordinate and transform arrays
 	Array2D <float> XCoords(NRows, NCols, NoDataValue);
@@ -3198,7 +3198,7 @@ Array2D <float> LSDRaster::Shadows(int Azimuth, int ZenithAngle)
 	}
 
 	//Print to screen
-	//printf("LSDRaster::%s\n",__func__);
+	//fprintf(stderr, "LSDRaster::%s\n",__func__);
 
 	for (int i = 0; i < NRows; ++i)
 	{
@@ -3277,14 +3277,14 @@ Array2D <float> LSDRaster::Shadows(int Azimuth, int ZenithAngle)
 	else
 	{
 		//critical error, Azimuth outside range
-		printf("LSDRaster:FATAL ERROR: Encountered Azimuth out of range. In %s at line %d\n", __func__, __LINE__);
+		fprintf(stderr, "LSDRaster:FATAL ERROR: Encountered Azimuth out of range. In %s at line %d\n", __func__, __LINE__);
 		exit(EXIT_FAILURE);
 	}
 
 	//print to screen
 	float Percentage = (100. * PrintCounter / (NRows * NCols));
-	fflush(stdout);
-	printf("%3.0f %% Complete\b\b\b\b\b\b\b\b\b\b\b\b\b\b", Percentage);
+	fflush(stderr);
+	fprintf(stderr, "%3.0f %% Complete\b\b\b\b\b\b\b\b\b\b\b\b\b\b", Percentage);
 
 	for (int ii = 0; ii < NRows; ++ii)
 	{
@@ -3316,8 +3316,8 @@ Array2D <float> LSDRaster::Shadows(int Azimuth, int ZenithAngle)
 			if (PrintCounter > Print)
 			{
 				float Percentage = (100. * PrintCounter / (NRows * NCols));
-				fflush(stdout);
-				printf("%3.0f\b\b\b", Percentage);
+				fflush(stderr);
+				fprintf(stderr, "%3.0f\b\b\b", Percentage);
 				Print += PrintStep;
 			}
 
@@ -3415,8 +3415,8 @@ Array2D <float> LSDRaster::Shadows(int Azimuth, int ZenithAngle)
 	}
 
 	//Print completion to screen
-	fflush(stdout);
-	printf("100 %% Complete\r");
+	fflush(stderr);
+	fprintf(stderr, "100 %% Complete\r");
 
 	//write LSDRaster and return
 	return(Shadows);
