@@ -1203,6 +1203,9 @@ void LSDRaster::write_double_asc_raster(string string_filename)
 	}
 	
 	// Gotta dereference before writing to it like this
+	
+	// Write an extra \n to delimit
+	*data_out << "\n";
 	*data_out << "ncols\t" << NCols
 			 << "\nnrows\t" << NRows
 			 << "\nxllcorner\t" << setprecision(14) << XMinimum
