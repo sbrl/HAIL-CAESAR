@@ -1239,13 +1239,15 @@ void LSDRaster::write_double_raster(string filename, string extension)
 	string dot = ".";
 
 	string_filename = filename + dot + extension;
+	if(filename == "-")
+		string_filename = "-";
 	cerr << "The filename is " << string_filename << endl;
 
 	// this first bit of logic is for the asc file.
-	if (extension == "asc" || extension == "stdout")
+	if (extension == "asc")
 	{
 		// open the data file and write an ASC - a dash ("-") means stdout
-		write_double_asc_raster(extension == "stdin" ? "-" : string_filename);
+		write_double_asc_raster(string_filename);
 	}
 	else if (extension == "flt")
 	{

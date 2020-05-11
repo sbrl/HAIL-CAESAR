@@ -2047,7 +2047,10 @@ void LSDCatchmentModel::save_raster_data(double tempcycle)
 
 		std::string OUTPUT_WATERD_FILE = write_path + "/" +	\
 										 current_water_depth_filename;
-
+		
+		if(waterdepth_fname == "-")
+			OUTPUT_WATERD_FILE = "-";
+		
 		water_depthR.write_double_raster(OUTPUT_WATERD_FILE, dem_write_extension);
 	}
 
