@@ -1191,7 +1191,7 @@ void LSDRaster::write_double_bil_raster(string filename, string string_filename)
 
 void LSDRaster::write_double_asc_raster(string string_filename)
 {
-	bool is_stdout = string_filename != "-";
+	bool is_stdout = string_filename == "-";
 	ostream* data_out = &std::cout;
 	if(!is_stdout)
 		new ofstream(string_filename.c_str());
